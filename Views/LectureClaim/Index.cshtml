@@ -135,6 +135,7 @@
                                     </div>
                                 </div>
                             </section>
+
                             <section>
                                 <h2 class="text-xl md:text-[22px] font-bold leading-tight tracking-[-0.015em] pb-3 pt-5 border-b border-gray-200 dark:border-gray-700 mb-4">Supporting Documents</h2>
                                 <p class="text-sm text-gray-500 dark:text-gray-400 px-4 mb-4">Upload any relevant supporting documents (e.g., timesheets, receipts).</p>
@@ -146,7 +147,7 @@
                                                 <p class="mb-2 text-sm"><span class="font-semibold">Click to upload</span> or drag and drop</p>
                                                 <p class="text-xs">PDF, PNG, JPG or DOCX (MAX. 5MB)</p>
                                             </div>
-                                            <input class="hidden" id="dropzone-file" type="file" />
+                                            <input class="hidden" id="dropzone-file" type="file" multiple accept=".pdf,.png,.jpg,.jpeg,.docx" />
                                         </label>
                                     </div>
                                     <div class="mt-4 space-y-2">
@@ -162,6 +163,7 @@
                                     </div>
                                 </div>
                             </section>
+
                             <div class="flex justify-end gap-4 pt-8">
                                 <button class="flex min-w-[120px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90">
                                     <span class="truncate">Submit Claim</span>
@@ -173,5 +175,31 @@
             </div>
         </div>
     </div>
+    <script>
+document.getElementById('dropzone-file').addEventListener('change', function(e) {
+    const files = e.target.files;
+    const container = document.querySelector('.mt-4.space-y-2');
+    
+    // Clear existing files display (except the sample)
+    const existingFiles = container.querySelectorAll('.flex.items-center.justify-between');
+    existingFiles.forEach(file => file.remove());
+    
+    // Display selected files
+    Array.from(files).forEach(file => {
+        const fileDiv = document.createElement('div');
+        fileDiv.className = 'flex items-center justify-between p-2 border rounded-lg bg-background-light dark:bg-gray-800 dark:border-gray-700';
+        fileDiv.innerHTML = `
+            <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-primary" style="font-size:24px;">insert_drive_file</span>
+                <span class="text-sm font-medium">${file.name}</span>
+            </div>
+            <button type="button" class="text-error/80 hover:text-error dark:text-error/70 dark:hover:text-error" onclick="this.parentElement.remove()">
+                <span class="material-symbols-outlined" style="font-size:20px;">close</span>
+            </button>
+        `;
+        container.appendChild(fileDiv);
+    });
+});
+</script>
 </body>
 </html>

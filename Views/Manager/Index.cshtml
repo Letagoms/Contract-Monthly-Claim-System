@@ -4,12 +4,10 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>CMCS Login</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <title>Manager Dashboard - Contract Monthly Claim System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script>
         tailwind.config = {
           darkMode: "class",
@@ -19,15 +17,9 @@
                 "primary": "#1173d4",
                 "background-light": "#f6f7f8",
                 "background-dark": "#101922",
-                "text-light": "#0d141b",
-                "text-dark": "#e7edf3",
-                "text-secondary-light": "#4c739a",
-                "text-secondary-dark": "#a1b4c5",
-                "input-bg-light": "#e7edf3",
-                "input-bg-dark": "#1a2a38"
               },
               fontFamily: {
-                "display": ["Inter", "Noto Sans", "sans-serif"]
+                "display": ["Inter", "sans-serif"]
               },
               borderRadius: {
                 "DEFAULT": "0.25rem",
@@ -40,56 +32,176 @@
         }
     </script>
 </head>
-<body class="bg-background-light dark:bg-background-dark font-display">
-    <div class="relative flex min-h-screen flex-col items-center justify-center overflow-hidden">
-        <div class="flex w-full max-w-4xl flex-col items-center justify-center p-4 lg:flex-row">
-            <div class="w-full max-w-md lg:w-1/2 flex flex-col justify-center p-8">
-                <div class="mb-8 text-center">
-                    <div class="flex justify-center mb-4">
-                        <svg class="h-12 w-12 text-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg>
-                    </div>
-                    <p class="text-text-light dark:text-text-dark text-4xl font-black leading-tight tracking-[-0.033em]">Welcome to CMCS</p>
-                    <p class="text-text-secondary-light dark:text-text-secondary-dark text-base font-normal leading-normal">Please log in to continue.</p>
-                </div>
-                <div class="flex flex-col gap-4">
-                    <label class="flex flex-col">
-                        <p class="text-text-light dark:text-text-dark text-base font-medium leading-normal pb-2">Email or Username</p>
-                        <input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-none bg-input-bg-light dark:bg-input-bg-dark focus:border-none h-14 placeholder:text-text-secondary-light dark:placeholder:text-text-secondary-dark p-4 text-base font-normal leading-normal" placeholder="you@example.com" value="" />
-                    </label>
-                    <label class="flex flex-col">
-                        <p class="text-text-light dark:text-text-dark text-base font-medium leading-normal pb-2">Password</p>
-                        <div class="flex w-full flex-1 items-stretch rounded-lg">
-                            <input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-none bg-input-bg-light dark:bg-input-bg-dark focus:border-none h-14 placeholder:text-text-secondary-light dark:placeholder:text-text-secondary-dark p-4 rounded-r-none border-r-0 pr-2 text-base font-normal leading-normal" placeholder="••••••••" type="password" value="" />
-                            <button class="text-text-secondary-light dark:text-text-secondary-dark flex border-none bg-input-bg-light dark:bg-input-bg-dark items-center justify-center pr-4 rounded-r-lg border-l-0 focus:outline-none focus:ring-2 focus:ring-primary/50">
-                                <span class="material-symbols-outlined text-2xl">visibility</span>
-                            </button>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-[#343A40] dark:text-gray-200">
+
+    <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+            <header class="bg-white dark:bg-background-dark/80 backdrop-blur-sm sticky top-0 z-10 border-b border-gray-200 dark:border-gray-700">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex items-center justify-between h-16">
+                        <div class="flex items-center gap-4">
+                            <span class="material-symbols-outlined text-primary text-2xl">
+                                admin_panel_settings
+                            </span>
+                            <h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">Contract Monthly Claim System - Manager Dashboard</h2>
                         </div>
-                    </label>
-                    <label class="flex flex-col">
-                        <p class="text-text-light dark:text-text-dark text-base font-medium leading-normal pb-2">Role</p>
-                        <select class="form-select flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-none bg-input-bg-light dark:bg-input-bg-dark focus:border-none h-14 placeholder:text-text-secondary-light dark:placeholder:text-text-secondary-dark p-4 text-base font-normal leading-normal appearance-none bg-no-repeat bg-right pr-8" style="background-image: url('data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2724px%27 height=%2724px%27 fill=%27rgb(76,115,154)%27 viewBox=%270 0 256 256%27%3e%3cpath d=%27M181.66,170.34a8,8,0,0,1,0,11.32l-48,48a8,8,0,0,1-11.32,0l-48-48a8,8,0,0,1,11.32-11.32L128,212.69l42.34-42.35A8,8,0,0,1,181.66,170.34Zm-96-84.68L128,43.31l42.34,42.35a8,8,0,0,0,11.32-11.32l-48-48a8,8,0,0,0-11.32,0l-48,48A8,8,0,0,0,85.66,85.66Z%27%3e%3c/path%3e%3c/svg%3e');">
-                            <option value="one">Select your role</option>
-                            <option value="lecturer">Lecturer</option>
-                            <option value="coordinator">Coordinator</option>
-                            <option value="manager">Manager</option>
-                        </select>
-                    </label>
+                        <div class="flex items-center gap-4">
+                            <a class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em]" href="@Url.Action("Index", "Register")">
+                                <span class="truncate">Logout</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="mt-6">
-                    <button class="w-full rounded-lg bg-primary py-4 text-center text-base font-semibold text-white transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 dark:focus:ring-offset-background-dark">
-                        Login
-                    </button>
+            </header>
+            <main class="flex-1">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                    <div class="flex flex-col gap-6">
+                        <div class="flex flex-wrap justify-between gap-3 p-4">
+                            <div class="flex min-w-72 flex-col gap-3">
+                                <p class="text-4xl font-black leading-tight tracking-[-0.033em]">Manager Dashboard</p>
+                                <p class="text-gray-500 dark:text-gray-400 text-base font-normal leading-normal">Manage and review all submitted claims</p>
+                            </div>
+                        </div>
+
+                        <!-- Statistics Cards -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 px-4">
+                            <div class="bg-white dark:bg-background-dark/50 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Total Claims</p>
+                                        <p class="text-3xl font-bold text-primary">156</p>
+                                    </div>
+                                    <span class="material-symbols-outlined text-primary text-3xl">receipt_long</span>
+                                </div>
+                            </div>
+                            <div class="bg-white dark:bg-background-dark/50 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Pending Approval</p>
+                                        <p class="text-3xl font-bold text-[#FFC107]">23</p>
+                                    </div>
+                                    <span class="material-symbols-outlined text-[#FFC107] text-3xl">pending_actions</span>
+                                </div>
+                            </div>
+                            <div class="bg-white dark:bg-background-dark/50 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">This Month</p>
+                                        <p class="text-3xl font-bold text-[#28A745]">$45,670</p>
+                                    </div>
+                                    <span class="material-symbols-outlined text-[#28A745] text-3xl">payments</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Claims Management Table -->
+                        <div class="px-4 py-3">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-xl font-bold">All Claims</h3>
+                                <div class="flex gap-2">
+                                    <select class="form-select rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-background-dark px-3 py-2 text-sm">
+                                        <option>All Status</option>
+                                        <option>Pending</option>
+                                        <option>Approved</option>
+                                        <option>Rejected</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="flex overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-background-dark/50">
+                                <table class="flex-1">
+                                    <thead>
+                                        <tr class="bg-gray-50 dark:bg-gray-800/50">
+                                            <th class="px-4 py-3 text-left text-sm font-medium leading-normal w-[12%]">Claim ID</th>
+                                            <th class="px-4 py-3 text-left text-sm font-medium leading-normal w-[18%]">Lecturer</th>
+                                            <th class="px-4 py-3 text-left text-sm font-medium leading-normal w-[15%]">Submit Date</th>
+                                            <th class="px-4 py-3 text-left text-sm font-medium leading-normal w-[15%]">Period</th>
+                                            <th class="px-4 py-3 text-left text-sm font-medium leading-normal w-[12%]">Amount</th>
+                                            <th class="px-4 py-3 text-left text-sm font-medium leading-normal w-[12%]">Status</th>
+                                            <th class="px-4 py-3 text-left text-sm font-medium leading-normal w-[16%]">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border-t border-t-gray-200 dark:border-t-gray-700">
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">#CMCS-001</td>
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">John Smith</td>
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">2023-10-26</td>
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">Oct 2023</td>
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">$2,500.00</td>
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">
+                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#FFC107]/20 text-[#FFC107]">
+                                                    Pending
+                                                </span>
+                                            </td>
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">
+                                                <div class="flex gap-2">
+                                                    <button class="px-3 py-1 bg-[#28A745] text-white text-xs rounded hover:bg-[#28A745]/90">Approve</button>
+                                                    <button class="px-3 py-1 bg-[#DC3545] text-white text-xs rounded hover:bg-[#DC3545]/90">Reject</button>
+                                                    <button class="px-3 py-1 bg-primary text-white text-xs rounded hover:bg-primary/90">View</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="border-t border-t-gray-200 dark:border-t-gray-700">
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">#CMCS-002</td>
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">Jane Doe</td>
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">2023-10-25</td>
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">Oct 2023</td>
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">$2,300.00</td>
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">
+                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#28A745]/20 text-[#28A745]">
+                                                    Approved
+                                                </span>
+                                            </td>
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">
+                                                <div class="flex gap-2">
+                                                    <button class="px-3 py-1 bg-primary text-white text-xs rounded hover:bg-primary/90">View</button>
+                                                    <button class="px-3 py-1 bg-gray-500 text-white text-xs rounded hover:bg-gray-500/90">Details</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="border-t border-t-gray-200 dark:border-t-gray-700">
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">#CMCS-003</td>
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">Mike Johnson</td>
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">2023-10-24</td>
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">Sep 2023</td>
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">$1,890.00</td>
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">
+                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#FFC107]/20 text-[#FFC107]">
+                                                    Pending
+                                                </span>
+                                            </td>
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">
+                                                <div class="flex gap-2">
+                                                    <button class="px-3 py-1 bg-[#28A745] text-white text-xs rounded hover:bg-[#28A745]/90">Approve</button>
+                                                    <button class="px-3 py-1 bg-[#DC3545] text-white text-xs rounded hover:bg-[#DC3545]/90">Reject</button>
+                                                    <button class="px-3 py-1 bg-primary text-white text-xs rounded hover:bg-primary/90">View</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Pagination -->
+                        <div class="flex items-center justify-center p-4">
+                            <a class="flex size-10 items-center justify-center hover:bg-gray-200/50 dark:hover:bg-gray-700/50 rounded-full" href="#">
+                                <span class="material-symbols-outlined text-lg">chevron_left</span>
+                            </a>
+                            <a class="text-sm font-bold leading-normal flex size-10 items-center justify-center rounded-full bg-primary/20 text-primary" href="#">1</a>
+                            <a class="text-sm font-normal leading-normal flex size-10 items-center justify-center rounded-full hover:bg-gray-200/50 dark:hover:bg-gray-700/50" href="#">2</a>
+                            <a class="text-sm font-normal leading-normal flex size-10 items-center justify-center rounded-full hover:bg-gray-200/50 dark:hover:bg-gray-700/50" href="#">3</a>
+                            <span class="text-sm font-normal leading-normal flex size-10 items-center justify-center rounded-full">...</span>
+                            <a class="text-sm font-normal leading-normal flex size-10 items-center justify-center rounded-full hover:bg-gray-200/50 dark:hover:bg-gray-700/50" href="#">8</a>
+                            <a class="text-sm font-normal leading-normal flex size-10 items-center justify-center rounded-full hover:bg-gray-200/50 dark:hover:bg-gray-700/50" href="#">9</a>
+                            <a class="text-sm font-normal leading-normal flex size-10 items-center justify-center rounded-full hover:bg-gray-200/50 dark:hover:bg-gray-700/50" href="#">10</a>
+                            <a class="flex size-10 items-center justify-center hover:bg-gray-200/50 dark:hover:bg-gray-700/50 rounded-full" href="#">
+                                <span class="material-symbols-outlined text-lg">chevron_right</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="mt-6 flex justify-between text-sm">
-                    <a class="font-medium text-primary hover:underline" href="#">Forgot Password?</a>
-                    <a class="font-medium text-primary hover:underline" href="#">Don't have an account? Register</a>
-                </div>
-            </div>
-            <div class="hidden lg:flex lg:w-1/2 items-center justify-center p-8">
-                <div class="w-full aspect-square rounded-xl bg-cover bg-center" data-alt="Abstract gradient illustration representing technology and data." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBwseDjxjVJrzAAI49ZPgxwy21Kr8SurZvtnaR1TZJLB4MFCtbEiZfmyAFjPaH5wu31V4JAoqqYZF2MXiU6P-o0s76XopRZ6e0CNV78UxnlHy36y2TIbWMe6BC5t6qrxcZpoMRoec5dKSboWLI7LugETD9rkJqGkjtlD1aaMZHbtJtVdPTwvnG-NvWVVyg_TWosaYysap5S9nrqA4R4bj4Q9ibU6txn4gurL9DIFk2W9bfkfdFsUPsDEsvOK93Xfja6m1thCDjJPftH");'></div>
-            </div>
+            </main>
         </div>
     </div>
 </body>

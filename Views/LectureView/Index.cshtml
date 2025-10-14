@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>My Submitted Claims - Contract Monthly Claim System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#007BFF",
+                "background-light": "#F8F9FA",
+                "background-dark": "#101922",
+              },
+              fontFamily: {
+                "display": ["Inter", "sans-serif"]
+              },
+              borderRadius: {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+              },
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#343A40] dark:text-gray-200">
+    <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+            <header class="bg-white dark:bg-background-dark/80 backdrop-blur-sm sticky top-0 z-10 border-b border-gray-200 dark:border-gray-700">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex items-center justify-between h-16">
+                        <div class="flex items-center gap-4">
+                            <span class="material-symbols-outlined text-primary text-2xl">
+                                receipt_long
+                            </span>
+                            <h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">Contract Monthly Claim System</h2>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <a class="text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary" href="@Url.Action("LectureClaim", "Home")">Submit New Claim</a>
+                            <a class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em]" href="@Url.Action("Login", "Home")">
+                                <span class="truncate">Logout</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <main class="flex-1">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                    <div class="flex flex-col gap-6">
+                        <div class="flex flex-wrap justify-between gap-3 p-4">
+                            <div class="flex min-w-72 flex-col gap-3">
+                                <p class="text-4xl font-black leading-tight tracking-[-0.033em]">My Submitted Claims</p>
+                                <p class="text-gray-500 dark:text-gray-400 text-base font-normal leading-normal">View the status and details of your submitted claims</p>
+                            </div>
+                        </div>
+                        <!-- Claims Table -->
+                        <div class="px-4 py-3 container">
+                            <div class="flex overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-background-dark/50">
+                                <table class="flex-1">
+                                    <thead>
+                                        <tr class="bg-gray-50 dark:bg-gray-800/50">
+                                            <th class="px-4 py-3 text-left text-sm font-medium leading-normal w-[15%]">Claim ID</th>
+                                            <th class="px-4 py-3 text-left text-sm font-medium leading-normal w-[20%]">Submission Date</th>
+                                            <th class="px-4 py-3 text-left text-sm font-medium leading-normal w-[20%]">Claim Period</th>
+                                            <th class="px-4 py-3 text-left text-sm font-medium leading-normal w-[15%]">Amount</th>
+                                            <th class="px-4 py-3 text-left text-sm font-medium leading-normal w-[15%]">Status</th>
+                                            <th class="px-4 py-3 text-left text-sm font-medium leading-normal w-[15%]">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border-t border-t-gray-200 dark:border-t-gray-700">
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">#CMCS-001</td>
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">2023-10-26</td>
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">October 2023</td>
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">$2,500.00</td>
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">
+                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#28A745]/20 text-[#28A745]">
+                                                    Approved
+                                                </span>
+                                            </td>
+                                            <td class="h-[72px] px-4 py-2 text-sm font-medium leading-normal tracking-[0.015em] text-primary hover:underline cursor-pointer">
+                                                View Details
+                                            </td>
+                                        </tr>
+                                        <tr class="border-t border-t-gray-200 dark:border-t-gray-700">
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">#CMCS-002</td>
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">2023-09-26</td>
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">September 2023</td>
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">$2,300.00</td>
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">
+                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#FFC107]/20 text-[#FFC107]">
+                                                    Pending
+                                                </span>
+                                            </td>
+                                            <td class="h-[72px] px-4 py-2 text-sm font-medium leading-normal tracking-[0.015em] text-primary hover:underline cursor-pointer">
+                                                View Details
+                                            </td>
+                                        </tr>
+                                        <tr class="border-t border-t-gray-200 dark:border-t-gray-700">
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">#CMCS-003</td>
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">2023-08-26</td>
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">August 2023</td>
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">$2,450.00</td>
+                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">
+                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#DC3545]/20 text-[#DC3545]">
+                                                    Rejected
+                                                </span>
+                                            </td>
+                                            <td class="h-[72px] px-4 py-2 text-sm font-medium leading-normal tracking-[0.015em] text-primary hover:underline cursor-pointer">
+                                                View Details
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- Pagination -->
+                        <div class="flex items-center justify-center p-4">
+                            <a class="flex size-10 items-center justify-center hover:bg-gray-200/50 dark:hover:bg-gray-700/50 rounded-full" href="#">
+                                <span class="material-symbols-outlined text-lg">chevron_left</span>
+                            </a>
+                            <a class="text-sm font-bold leading-normal flex size-10 items-center justify-center rounded-full bg-primary/20 text-primary" href="#">1</a>
+                            <a class="text-sm font-normal leading-normal flex size-10 items-center justify-center rounded-full hover:bg-gray-200/50 dark:hover:bg-gray-700/50" href="#">2</a>
+                            <a class="text-sm font-normal leading-normal flex size-10 items-center justify-center rounded-full hover:bg-gray-200/50 dark:hover:bg-gray-700/50" href="#">3</a>
+                            <span class="text-sm font-normal leading-normal flex size-10 items-center justify-center rounded-full">...</span>
+                            <a class="text-sm font-normal leading-normal flex size-10 items-center justify-center rounded-full hover:bg-gray-200/50 dark:hover:bg-gray-700/50" href="#">8</a>
+                            <a class="text-sm font-normal leading-normal flex size-10 items-center justify-center rounded-full hover:bg-gray-200/50 dark:hover:bg-gray-700/50" href="#">9</a>
+                            <a class="text-sm font-normal leading-normal flex size-10 items-center justify-center rounded-full hover:bg-gray-200/50 dark:hover:bg-gray-700/50" href="#">10</a>
+                            <a class="flex size-10 items-center justify-center hover:bg-gray-200/50 dark:hover:bg-gray-700/50 rounded-full" href="#">
+                                <span class="material-symbols-outlined text-lg">chevron_right</span>
+                            </a>
+                        </div>
+                        <!-- Empty State Example -->
+                        <!-- <div class="flex flex-col px-4 py-16">
+                                            <div class="flex flex-col items-center gap-6">
+                                                <div class="w-full max-w-sm">
+                                                   <svg class="w-full h-auto text-gray-300 dark:text-gray-600" fill="none" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+                                                        <path stroke="currentColor" stroke-width="2" d="M10 10h180v130H10z" />
+                                                        <path stroke="currentColor" stroke-width="2" d="M10 50h180M50 10v130M100 10v130M150 10v130" />
+                                                        <path fill="currentColor" d="M85 85h30v30H85z" />
+                                                        <path fill="currentColor" d="M85 85a15 15 0 0 1 30 0h-30z" />
+                                                    </svg>
+                                                </div>
+                                                <div class="flex max-w-[480px] flex-col items-center gap-2">
+                                                    <p class="text-lg font-bold leading-tight tracking-[-0.015em] max-w-[480px] text-center">No claims submitted</p>
+                                                    <p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal max-w-[480px] text-center">
+                                                        You have not submitted any claims yet. Get started by submitting your first claim.
+                                                    </p>
+                                                </div>
+                                                <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em]">
+                                                    <span class="truncate">Submit a New Claim</span>
+                                                </button>
+                                            </div>
+                                        </div> -->
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

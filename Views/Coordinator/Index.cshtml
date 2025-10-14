@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>CMCS - Coordinator Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#005A9C",
+                        "background-light": "#F0F2F5",
+                        "background-dark": "#101922",
+                        "accent-green": "#28A745",
+                        "accent-red": "#DC3545",
+                        "text-dark": "#333333",
+                        "text-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-dark dark:text-text-light">
+    <div class="flex min-h-screen">
+        <!-- SideNavBar -->
+        <aside class="w-64 bg-white dark:bg-slate-900/70 p-4 flex flex-col justify-between border-r border-slate-200 dark:border-slate-800">
+            <div>
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="CMCS logo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCzmqkeXGdDj54xxVf_zCemX86kuXn6muAUsb87jkPZ3bUhd24eY_7x9PNOYrtpgHyeQjIqDyFe_iQ53Tzv_DyqcsE1YTgo2C59_MOo5en8QYgSDrAU25pOUULFRTyETTc5wBb-rZYb_jYGZoVbEtsu0kATb1apfQ5qvg-odsmxQdV7yff2YEIbfBtbpKd7r7itotMR2B35S40tDe2y569a8_njrgFZxx30Azyp0ILE8MZg3iEAnoGAzJJfpLQaby7tC-TZDlldoe-4");'></div>
+                    <div class="flex flex-col">
+                        <h1 class="text-text-dark dark:text-white text-base font-medium leading-normal">CMCS</h1>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">Coordinator Dashboard</p>
+                    </div>
+                </div>
+                <nav class="flex flex-col gap-2">
+                    <a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/20 text-primary" href="#">
+                        <span class="material-symbols-outlined">dashboard</span>
+                        <p class="text-sm font-medium leading-normal">Dashboard</p>
+                    </a>
+                </nav>
+            </div>
+            <div class="flex flex-col gap-1">
+                <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" href="#">
+                    <span class="material-symbols-outlined">logout</span>
+                    <p class="text-sm font-medium leading-normal">Logout</p>
+                </a>
+            </div>
+        </aside>
+        <!-- Main Content -->
+        <main class="flex-1 p-8">
+            <div class="max-w-7xl mx-auto">
+                <!-- PageHeading -->
+                <div class="flex flex-wrap justify-between gap-3 mb-8">
+                    <p class="text-text-dark dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">Claims awaiting review</p>
+                </div>
+                <!-- Table -->
+                <div class="bg-white dark:bg-slate-900/70 rounded-xl shadow-sm overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-slate-500 dark:text-slate-400">
+                            <thead class="text-xs text-slate-700 uppercase bg-slate-50 dark:bg-slate-800 dark:text-slate-400">
+                                <tr>
+                                    <th class="px-6 py-3" scope="col">Lecturer Name</th>
+                                    <th class="px-6 py-3" scope="col">Submission Date</th>
+                                    <th class="px-6 py-3" scope="col">Claim Amount</th>
+                                    <th class="px-6 py-3" scope="col">Status</th>
+                                    <th class="px-6 py-3 text-center" scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-white border-b dark:bg-slate-900 dark:border-slate-800">
+                                    <th class="px-6 py-4 font-medium text-text-dark dark:text-white whitespace-nowrap" scope="row">John Doe</th>
+                                    <td class="px-6 py-4">2023-10-26</td>
+                                    <td class="px-6 py-4">$2,500.00</td>
+                                    <td class="px-6 py-4">
+                                        <span class="px-2 py-1 text-xs font-medium text-yellow-800 bg-yellow-100 rounded-full dark:bg-yellow-900 dark:text-yellow-300">Pending</span>
+                                    </td>
+                                    <td class="px-6 py-4 flex items-center justify-center gap-2">
+                                        <button class="flex items-center justify-center h-8 px-3 text-white bg-primary rounded-lg text-sm font-medium hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/50">
+                                            <span class="material-symbols-outlined text-base mr-1">visibility</span>
+                                            Details
+                                        </button>
+                                        <button class="flex items-center justify-center h-8 px-3 text-white bg-accent-green rounded-lg text-sm font-medium hover:bg-accent-green/90 focus:outline-none focus:ring-2 focus:ring-accent-green/50">
+                                            <span class="material-symbols-outlined text-base mr-1">check_circle</span>
+                                            Verify
+                                        </button>
+                                        <button class="flex items-center justify-center h-8 px-3 text-white bg-accent-red rounded-lg text-sm font-medium hover:bg-accent-red/90 focus:outline-none focus:ring-2 focus:ring-accent-red/50">
+                                            <span class="material-symbols-outlined text-base mr-1">cancel</span>
+                                            Reject
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="bg-white border-b dark:bg-slate-900 dark:border-slate-800">
+                                    <th class="px-6 py-4 font-medium text-text-dark dark:text-white whitespace-nowrap" scope="row">Jane Smith</th>
+                                    <td class="px-6 py-4">2023-10-25</td>
+                                    <td class="px-6 py-4">$3,000.00</td>
+                                    <td class="px-6 py-4">
+                                        <span class="px-2 py-1 text-xs font-medium text-yellow-800 bg-yellow-100 rounded-full dark:bg-yellow-900 dark:text-yellow-300">Pending</span>
+                                    </td>
+                                    <td class="px-6 py-4 flex items-center justify-center gap-2">
+                                        <button class="flex items-center justify-center h-8 px-3 text-white bg-primary rounded-lg text-sm font-medium hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/50">
+                                            <span class="material-symbols-outlined text-base mr-1">visibility</span>
+                                            Details
+                                        </button>
+                                        <button class="flex items-center justify-center h-8 px-3 text-white bg-accent-green rounded-lg text-sm font-medium hover:bg-accent-green/90 focus:outline-none focus:ring-2 focus:ring-accent-green/50">
+                                            <span class="material-symbols-outlined text-base mr-1">check_circle</span>
+                                            Verify
+                                        </button>
+                                        <button class="flex items-center justify-center h-8 px-3 text-white bg-accent-red rounded-lg text-sm font-medium hover:bg-accent-red/90 focus:outline-none focus:ring-2 focus:ring-accent-red/50">
+                                            <span class="material-symbols-outlined text-base mr-1">cancel</span>
+                                            Reject
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="bg-white border-b dark:bg-slate-900 dark:border-slate-800">
+                                    <th class="px-6 py-4 font-medium text-text-dark dark:text-white whitespace-nowrap" scope="row">Peter Jones</th>
+                                    <td class="px-6 py-4">2023-10-24</td>
+                                    <td class="px-6 py-4">$2,200.00</td>
+                                    <td class="px-6 py-4">
+                                        <span class="px-2 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full dark:bg-green-900 dark:text-green-300">Verified</span>
+                                    </td>
+                                    <td class="px-6 py-4 flex items-center justify-center gap-2">
+                                        <button class="flex items-center justify-center h-8 px-3 text-white bg-primary rounded-lg text-sm font-medium hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/50">
+                                            <span class="material-symbols-outlined text-base mr-1">visibility</span>
+                                            Details
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="bg-white dark:bg-slate-900">
+                                    <th class="px-6 py-4 font-medium text-text-dark dark:text-white whitespace-nowrap" scope="row">Susan Williams</th>
+                                    <td class="px-6 py-4">2023-10-23</td>
+                                    <td class="px-6 py-4">$1,800.00</td>
+                                    <td class="px-6 py-4">
+                                        <span class="px-2 py-1 text-xs font-medium text-red-800 bg-red-100 rounded-full dark:bg-red-900 dark:text-red-300">Rejected</span>
+                                    </td>
+                                    <td class="px-6 py-4 flex items-center justify-center gap-2">
+                                        <button class="flex items-center justify-center h-8 px-3 text-white bg-primary rounded-lg text-sm font-medium hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/50">
+                                            <span class="material-symbols-outlined text-base mr-1">visibility</span>
+                                            Details
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

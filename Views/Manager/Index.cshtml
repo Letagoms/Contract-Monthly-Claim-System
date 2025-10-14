@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>CMCS Login</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#1173d4",
+                "background-light": "#f6f7f8",
+                "background-dark": "#101922",
+                "text-light": "#0d141b",
+                "text-dark": "#e7edf3",
+                "text-secondary-light": "#4c739a",
+                "text-secondary-dark": "#a1b4c5",
+                "input-bg-light": "#e7edf3",
+                "input-bg-dark": "#1a2a38"
+              },
+              fontFamily: {
+                "display": ["Inter", "Noto Sans", "sans-serif"]
+              },
+              borderRadius: {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+              },
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+    <div class="relative flex min-h-screen flex-col items-center justify-center overflow-hidden">
+        <div class="flex w-full max-w-4xl flex-col items-center justify-center p-4 lg:flex-row">
+            <div class="w-full max-w-md lg:w-1/2 flex flex-col justify-center p-8">
+                <div class="mb-8 text-center">
+                    <div class="flex justify-center mb-4">
+                        <svg class="h-12 w-12 text-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </div>
+                    <p class="text-text-light dark:text-text-dark text-4xl font-black leading-tight tracking-[-0.033em]">Welcome to CMCS</p>
+                    <p class="text-text-secondary-light dark:text-text-secondary-dark text-base font-normal leading-normal">Please log in to continue.</p>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <label class="flex flex-col">
+                        <p class="text-text-light dark:text-text-dark text-base font-medium leading-normal pb-2">Email or Username</p>
+                        <input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-none bg-input-bg-light dark:bg-input-bg-dark focus:border-none h-14 placeholder:text-text-secondary-light dark:placeholder:text-text-secondary-dark p-4 text-base font-normal leading-normal" placeholder="you@example.com" value="" />
+                    </label>
+                    <label class="flex flex-col">
+                        <p class="text-text-light dark:text-text-dark text-base font-medium leading-normal pb-2">Password</p>
+                        <div class="flex w-full flex-1 items-stretch rounded-lg">
+                            <input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-none bg-input-bg-light dark:bg-input-bg-dark focus:border-none h-14 placeholder:text-text-secondary-light dark:placeholder:text-text-secondary-dark p-4 rounded-r-none border-r-0 pr-2 text-base font-normal leading-normal" placeholder="••••••••" type="password" value="" />
+                            <button class="text-text-secondary-light dark:text-text-secondary-dark flex border-none bg-input-bg-light dark:bg-input-bg-dark items-center justify-center pr-4 rounded-r-lg border-l-0 focus:outline-none focus:ring-2 focus:ring-primary/50">
+                                <span class="material-symbols-outlined text-2xl">visibility</span>
+                            </button>
+                        </div>
+                    </label>
+                    <label class="flex flex-col">
+                        <p class="text-text-light dark:text-text-dark text-base font-medium leading-normal pb-2">Role</p>
+                        <select class="form-select flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-none bg-input-bg-light dark:bg-input-bg-dark focus:border-none h-14 placeholder:text-text-secondary-light dark:placeholder:text-text-secondary-dark p-4 text-base font-normal leading-normal appearance-none bg-no-repeat bg-right pr-8" style="background-image: url('data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2724px%27 height=%2724px%27 fill=%27rgb(76,115,154)%27 viewBox=%270 0 256 256%27%3e%3cpath d=%27M181.66,170.34a8,8,0,0,1,0,11.32l-48,48a8,8,0,0,1-11.32,0l-48-48a8,8,0,0,1,11.32-11.32L128,212.69l42.34-42.35A8,8,0,0,1,181.66,170.34Zm-96-84.68L128,43.31l42.34,42.35a8,8,0,0,0,11.32-11.32l-48-48a8,8,0,0,0-11.32,0l-48,48A8,8,0,0,0,85.66,85.66Z%27%3e%3c/path%3e%3c/svg%3e');">
+                            <option value="one">Select your role</option>
+                            <option value="lecturer">Lecturer</option>
+                            <option value="coordinator">Coordinator</option>
+                            <option value="manager">Manager</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="mt-6">
+                    <button class="w-full rounded-lg bg-primary py-4 text-center text-base font-semibold text-white transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 dark:focus:ring-offset-background-dark">
+                        Login
+                    </button>
+                </div>
+                <div class="mt-6 flex justify-between text-sm">
+                    <a class="font-medium text-primary hover:underline" href="#">Forgot Password?</a>
+                    <a class="font-medium text-primary hover:underline" href="#">Don't have an account? Register</a>
+                </div>
+            </div>
+            <div class="hidden lg:flex lg:w-1/2 items-center justify-center p-8">
+                <div class="w-full aspect-square rounded-xl bg-cover bg-center" data-alt="Abstract gradient illustration representing technology and data." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBwseDjxjVJrzAAI49ZPgxwy21Kr8SurZvtnaR1TZJLB4MFCtbEiZfmyAFjPaH5wu31V4JAoqqYZF2MXiU6P-o0s76XopRZ6e0CNV78UxnlHy36y2TIbWMe6BC5t6qrxcZpoMRoec5dKSboWLI7LugETD9rkJqGkjtlD1aaMZHbtJtVdPTwvnG-NvWVVyg_TWosaYysap5S9nrqA4R4bj4Q9ibU6txn4gurL9DIFk2W9bfkfdFsUPsDEsvOK93Xfja6m1thCDjJPftH");'></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>CMCS - Create Account</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#1173d4",
+                "background-light": "#f6f7f8",
+                "background-dark": "#101922",
+              },
+              fontFamily: {
+                "display": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+    <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+            <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e7edf3] dark:border-b-background-dark/50 px-10 py-3">
+                <div class="flex items-center gap-4 text-slate-900 dark:text-slate-50">
+                    <div class="size-6 text-primary">
+                        <svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <path clip-rule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fill="currentColor" fill-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">CMCS</h2>
+                </div>
+            </header>
+            <div class="flex flex-1 justify-center py-10 px-4 sm:px-6 lg:px-8">
+                <div class="layout-content-container flex flex-col max-w-lg w-full flex-1">
+                    <div class="flex flex-col gap-8">
+                        <div class="flex flex-col gap-2 text-center">
+                            <h1 class="text-slate-900 dark:text-slate-50 text-4xl font-black leading-tight tracking-[-0.033em]">Create an Account</h1>
+                            <p class="text-slate-500 dark:text-slate-400">Join CMCS to streamline your monthly claims.</p>
+                        </div>
+
+                        <form asp-controller="Login" asp-action="Index" method="post" class="flex flex-col gap-6">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <label class="flex flex-col">
+                                    <p class="text-slate-900 dark:text-slate-50 text-sm font-medium leading-normal pb-2">First Name</p>
+                                    <input name="FirstName" class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-slate-50 focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-background-dark h-12 placeholder:text-slate-400 dark:placeholder:text-slate-500 p-3 text-base font-normal leading-normal" placeholder="John" value="" />
+                                </label>
+                                <label class="flex flex-col">
+                                    <p class="text-slate-900 dark:text-slate-50 text-sm font-medium leading-normal pb-2">Last Name</p>
+                                    <input name="LastName" class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-slate-50 focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-background-dark h-12 placeholder:text-slate-400 dark:placeholder:text-slate-500 p-3 text-base font-normal leading-normal" placeholder="Doe" value="" />
+                                </label>
+                            </div>
+                            <label class="flex flex-col">
+                                <p class="text-slate-900 dark:text-slate-50 text-sm font-medium leading-normal pb-2">Email Address</p>
+                                <input name="Email" type="email" class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-slate-50 focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-background-dark h-12 placeholder:text-slate-400 dark:placeholder:text-slate-500 p-3 text-base font-normal leading-normal" placeholder="john.doe@example.com" value="" />
+                            </label>
+                            <label class="flex flex-col">
+                                <p class="text-slate-900 dark:text-slate-50 text-sm font-medium leading-normal pb-2">Password</p>
+                                <div class="relative w-full">
+                                    <input name="Password" class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-slate-50 focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-background-dark h-12 placeholder:text-slate-400 dark:placeholder:text-slate-500 p-3 text-base font-normal leading-normal pr-10" placeholder="Enter your password" type="password" value="" />
+                                    <button type="button" class="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 dark:text-slate-500">
+                                        <span class="material-symbols-outlined text-xl">visibility</span>
+                                    </button>
+                                </div>
+                            </label>
+                            <label class="flex flex-col">
+                                <p class="text-slate-900 dark:text-slate-50 text-sm font-medium leading-normal pb-2">Confirm Password</p>
+                                <div class="relative w-full">
+                                    <input name="ConfirmPassword" class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-slate-50 focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-background-dark h-12 placeholder:text-slate-400 dark:placeholder:text-slate-500 p-3 text-base font-normal leading-normal pr-10" placeholder="Confirm your password" type="password" value="" />
+                                    <button type="button" class="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 dark:text-slate-500">
+                                        <span class="material-symbols-outlined text-xl">visibility_off</span>
+                                    </button>
+                                </div>
+                            </label>
+                            <label class="flex flex-col">
+                                <p class="text-slate-900 dark:text-slate-50 text-sm font-medium leading-normal pb-2">Select your role</p>
+                                <select name="role" required class="form-select flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-slate-50 focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-background-dark h-12 placeholder:text-slate-400 dark:placeholder:text-slate-500 p-3 text-base font-normal leading-normal">
+                                    <option value="">Select a role...</option>
+                                    <option value="Lecturer">Lecturer</option>
+                                    <option value="Coordinator">Coordinator</option>
+                                    <option value="Manager">Manager</option>
+                                </select>
+                            </label>
+
+                            @if (ViewBag.Error != null)
+                            {
+                                <div class="text-red-500 text-sm">
+                                    @ViewBag.Error
+                                </div>
+                            }
+
+                            <a href="/Login/Index" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-4 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/50 focus:ring-offset-background-light dark:focus:ring-offset-background-dark transition-colors duration-200 text-decoration-none">
+                                <span class="truncate">Register</span>
+                            </a>
+                        </form>
+
+                        <div class="text-center">
+                            <p class="text-sm text-slate-500 dark:text-slate-400">
+                                Already have an account?
+                                <a class="font-medium text-primary hover:underline" href="/Login/Index">Log in</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="flex items-center justify-center p-4 border-t border-solid border-t-[#e7edf3] dark:border-t-background-dark/50">
+                <p class="text-sm text-slate-500 dark:text-slate-400">© 2023 CMCS. All rights reserved.</p>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

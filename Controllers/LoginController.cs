@@ -10,7 +10,7 @@ namespace Contract_Monthly_Claim_System.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(string role, string FirstName, string LastName, string Email, string Password, string ConfirmPassword)
+        public IActionResult Index(string role)
         {
             
             if (role == "Lecturer")

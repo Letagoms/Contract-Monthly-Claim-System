@@ -44,7 +44,7 @@
                             <span class="material-symbols-outlined text-primary text-2xl">
                                 admin_panel_settings
                             </span>
-                            <h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">Contract Monthly Claim System - Manager Dashboard</h2>
+                            <h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">Contract Monthly Claim System </h2>
                         </div>
                         <div class="flex items-center gap-4">
                             <a class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em]" href="@Url.Action("Index", "Register")">
@@ -64,63 +64,30 @@
                             </div>
                         </div>
 
-                        <!-- Statistics Cards -->
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 px-4">
-                            <div class="bg-white dark:bg-background-dark/50 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
-                                <div class="flex items-center justify-between">
-                                    <div>
-                                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Total Claims</p>
-                                        <p class="text-3xl font-bold text-primary">156</p>
-                                    </div>
-                                    <span class="material-symbols-outlined text-primary text-3xl">receipt_long</span>
-                                </div>
-                            </div>
-                            <div class="bg-white dark:bg-background-dark/50 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
-                                <div class="flex items-center justify-between">
-                                    <div>
-                                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Pending Approval</p>
-                                        <p class="text-3xl font-bold text-[#FFC107]">23</p>
-                                    </div>
-                                    <span class="material-symbols-outlined text-[#FFC107] text-3xl">pending_actions</span>
-                                </div>
-                            </div>
-                            <div class="bg-white dark:bg-background-dark/50 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
-                                <div class="flex items-center justify-between">
-                                    <div>
-                                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">This Month</p>
-                                        <p class="text-3xl font-bold text-[#28A745]">$45,670</p>
-                                    </div>
-                                    <span class="material-symbols-outlined text-[#28A745] text-3xl">payments</span>
-                                </div>
-                            </div>
-                        </div>
+                     
+                       
 
                         <!-- Claims Management Table -->
                         <div class="px-4 py-3">
                             <div class="flex items-center justify-between mb-4">
                                 <h3 class="text-xl font-bold">All Claims</h3>
-                                <div class="flex gap-2">
-                                    <select class="form-select rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-background-dark px-3 py-2 text-sm">
-                                        <option>All Status</option>
-                                        <option>Pending</option>
-                                        <option>Approved</option>
-                                        <option>Rejected</option>
-                                    </select>
-                                </div>
+                                
                             </div>
                             <div class="flex overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-background-dark/50">
                                 <table class="flex-1">
                                     <thead>
                                         <tr class="bg-gray-50 dark:bg-gray-800/50">
-                                            <th class="px-4 py-3 text-left text-sm font-medium leading-normal w-[12%]">Claim ID</th>
-                                            <th class="px-4 py-3 text-left text-sm font-medium leading-normal w-[18%]">Lecturer</th>
-                                            <th class="px-4 py-3 text-left text-sm font-medium leading-normal w-[15%]">Submit Date</th>
-                                            <th class="px-4 py-3 text-left text-sm font-medium leading-normal w-[15%]">Period</th>
+                                            <th class="px-4 py-3 text-left text-sm font-medium leading-normal w-[12%]">Lecturer</th>
+                                            <th class="px-4 py-3 text-left text-sm font-medium leading-normal w-[18%]">Course</th>
+                                            <th class="px-4 py-3 text-left text-sm font-medium leading-normal w-[15%]">Submission date</th>
+                                            <th class="px-4 py-3 text-left text-sm font-medium leading-normal w-[15%]">Document</th>
                                             <th class="px-4 py-3 text-left text-sm font-medium leading-normal w-[12%]">Amount</th>
-                                            <th class="px-4 py-3 text-left text-sm font-medium leading-normal w-[12%]">Status</th>
-                                            <th class="px-4 py-3 text-left text-sm font-medium leading-normal w-[16%]">Actions</th>
+                                            <th class="px-4 py-3 text-left text-sm font-medium leading-normal w-[12%]">Coordinator Status</th>
+                                            <th class="px-4 py-3 text-left text-sm font-medium leading-normal w-[16%]">Action</th>
                                         </tr>
                                     </thead>
+
+                                    <!--data from here onwards-->
                                     <tbody>
                                         <tr class="border-t border-t-gray-200 dark:border-t-gray-700">
                                             <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">#CMCS-001</td>
@@ -141,43 +108,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr class="border-t border-t-gray-200 dark:border-t-gray-700">
-                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">#CMCS-002</td>
-                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">Jane Doe</td>
-                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">2023-10-25</td>
-                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">Oct 2023</td>
-                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">$2,300.00</td>
-                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">
-                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#28A745]/20 text-[#28A745]">
-                                                    Approved
-                                                </span>
-                                            </td>
-                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">
-                                                <div class="flex gap-2">
-                                                    <button class="px-3 py-1 bg-primary text-white text-xs rounded hover:bg-primary/90">View</button>
-                                                    <button class="px-3 py-1 bg-gray-500 text-white text-xs rounded hover:bg-gray-500/90">Details</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr class="border-t border-t-gray-200 dark:border-t-gray-700">
-                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">#CMCS-003</td>
-                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">Mike Johnson</td>
-                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">2023-10-24</td>
-                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">Sep 2023</td>
-                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">$1,890.00</td>
-                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">
-                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#FFC107]/20 text-[#FFC107]">
-                                                    Pending
-                                                </span>
-                                            </td>
-                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">
-                                                <div class="flex gap-2">
-                                                    <button class="px-3 py-1 bg-[#28A745] text-white text-xs rounded hover:bg-[#28A745]/90">Approve</button>
-                                                    <button class="px-3 py-1 bg-[#DC3545] text-white text-xs rounded hover:bg-[#DC3545]/90">Reject</button>
-                                                    <button class="px-3 py-1 bg-primary text-white text-xs rounded hover:bg-primary/90">View</button>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                       
                                     </tbody>
                                 </table>
                             </div>

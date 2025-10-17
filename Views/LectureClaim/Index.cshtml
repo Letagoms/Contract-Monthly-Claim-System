@@ -64,10 +64,6 @@
                                         <p class="text-base font-medium leading-normal pb-2">Lecturer's Name</p>
                                         <input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-0 border border-[#cfdbe7] dark:border-gray-600 bg-background-light dark:bg-gray-800 focus:border-primary h-14 placeholder:text-[#4c739a] p-[15px] text-base font-normal leading-normal"  value="John Doe" />
                                     </label>
-                                    <label class="flex flex-col min-w-40 flex-1">
-                                        <p class="text-base font-medium leading-normal pb-2">Comments</p>
-                                        <input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-0 border border-[#cfdbe7] dark:border-gray-600 bg-background-light dark:bg-gray-800 focus:border-primary h-14 placeholder:text-[#4c739a] p-[15px] text-base font-normal leading-normal"  value="please note..." />
-                                    </label>
                                 </div>
                             </section>
                             <section>
@@ -81,36 +77,27 @@
                                                 <th class="py-2 px-3 font-medium text-sm">Course Name</th>
                                                 <th class="py-2 px-3 font-medium text-sm ">Hours Worked</th>
                                                 <th class="py-2 px-3 font-medium text-sm">Hourly Rate (per hour)</th>
+                                                <th class="py-2 px-3 font-medium text-sm"></th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="lectureTableBody">
                                             <tr>
                                                 <td class="py-3 px-3"><input class="form-input w-full rounded-lg border-[#cfdbe7] dark:border-gray-600 bg-background-light dark:bg-gray-800 focus:border-primary focus:ring-primary/50 text-sm" type="date" /></td>
                                                 <td class="py-3 px-3"><input class="form-input w-full rounded-lg border-[#cfdbe7] dark:border-gray-600 bg-background-light dark:bg-gray-800 focus:border-primary focus:ring-primary/50 text-sm" placeholder="e.g., Advanced .NET" type="text" /></td>
                                                 <td class="py-3 px-3"><input class="form-input w-24 text-right rounded-lg border-[#cfdbe7] dark:border-gray-600 bg-background-light dark:bg-gray-800 focus:border-primary focus:ring-primary/50 text-sm" placeholder="0" type="number" /></td>
                                                 <td class="py-3 px-3"><input class="form-input w-24 text-right rounded-lg border-[#cfdbe7] dark:border-gray-600 bg-background-light dark:bg-gray-800 focus:border-primary focus:ring-primary/50 text-sm" placeholder="0" type="number" /></td>
                                                 <td class="py-3 px-3 text-right">
-                                                    <button class="text-error/80 hover:text-error dark:text-error/70 dark:hover:text-error">
+                                                    <button type="button" class="delete-lecture-btn text-error/80 hover:text-error dark:text-error/70 dark:hover:text-error" onclick="deleteLecture(this)">
                                                         <span class="material-symbols-outlined" style="font-size: 20px;">delete</span>
                                                     </button>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td class="py-3 px-3"><input class="form-input w-full rounded-lg border-[#cfdbe7] dark:border-gray-600 bg-background-light dark:bg-gray-800 focus:border-primary focus:ring-primary/50 text-sm" type="date" /></td>
-                                                <td class="py-3 px-3"><input class="form-input w-full rounded-lg border-[#cfdbe7] dark:border-gray-600 bg-background-light dark:bg-gray-800 focus:border-primary focus:ring-primary/50 text-sm" placeholder="e.g., Intro to Web Apps" type="text" /></td>
-                                                <td class="py-3 px-3"><input class="form-input w-24 text-right rounded-lg border-[#cfdbe7] dark:border-gray-600 bg-background-light dark:bg-gray-800 focus:border-primary focus:ring-primary/50 text-sm" placeholder="0" type="number" /></td>
-                                                <td class="py-3 px-3"><input class="form-input w-24 text-right rounded-lg border-[#cfdbe7] dark:border-gray-600 bg-background-light dark:bg-gray-800 focus:border-primary focus:ring-primary/50 text-sm" placeholder="0" type="number" /></td>
-                                                <td class="py-3 px-3 text-right">
-                                                    <button class="text-error/80 hover:text-error dark:text-error/70 dark:hover:text-error">
-                                                        <span class="material-symbols-outlined" style="font-size: 20px;">delete</span>
-                                                    </button>
-                                                </td>
-                                            </tr>
+                                            
                                         </tbody>
                                     </table>
                                 </div>
                                 <div class="flex justify-between items-center mt-4 px-4">
-                                    <button class="flex items-center gap-2 min-w-[84px] max-w-[480px] cursor-pointer justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/20 text-primary dark:bg-primary/30 dark:text-white text-sm font-bold leading-normal tracking-[0.015em]">
+                                    <button type="button" id="addLectureBtn" class="flex items-center gap-2 min-w-[84px] max-w-[480px] cursor-pointer justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/20 text-primary dark:bg-primary/30 dark:text-white text-sm font-bold leading-normal tracking-[0.015em]">
                                         <span class="material-symbols-outlined" style="font-size: 18px;">add</span>
                                         <span>Add Lecture</span>
                                     </button>
@@ -181,6 +168,39 @@ document.getElementById('dropzone-file').addEventListener('change', function(e) 
         container.appendChild(fileDiv);
     });
 });
+
+// Add Lecture functionality
+document.getElementById('addLectureBtn').addEventListener('click', function() {
+    const tableBody = document.getElementById('lectureTableBody');
+    const newRow = document.createElement('tr');
+    
+    newRow.innerHTML = `
+        <td class="py-3 px-3"><input class="form-input w-full rounded-lg border-[#cfdbe7] dark:border-gray-600 bg-background-light dark:bg-gray-800 focus:border-primary focus:ring-primary/50 text-sm" type="date" /></td>
+        <td class="py-3 px-3"><input class="form-input w-full rounded-lg border-[#cfdbe7] dark:border-gray-600 bg-background-light dark:bg-gray-800 focus:border-primary focus:ring-primary/50 text-sm" placeholder="e.g., Advanced .NET" type="text" /></td>
+        <td class="py-3 px-3"><input class="form-input w-24 text-right rounded-lg border-[#cfdbe7] dark:border-gray-600 bg-background-light dark:bg-gray-800 focus:border-primary focus:ring-primary/50 text-sm" placeholder="0" type="number" /></td>
+        <td class="py-3 px-3"><input class="form-input w-24 text-right rounded-lg border-[#cfdbe7] dark:border-gray-600 bg-background-light dark:bg-gray-800 focus:border-primary focus:ring-primary/50 text-sm" placeholder="0" type="number" /></td>
+        <td class="py-3 px-3 text-right">
+            <button type="button" class="delete-lecture-btn text-error/80 hover:text-error dark:text-error/70 dark:hover:text-error" onclick="deleteLecture(this)">
+                <span class="material-symbols-outlined" style="font-size: 20px;">delete</span>
+            </button>
+        </td>
+    `;
+    
+    tableBody.appendChild(newRow);
+});
+
+// Delete Lecture functionality
+function deleteLecture(button) {
+    const row = button.closest('tr');
+    const tableBody = document.getElementById('lectureTableBody');
+    
+    // Prevent deleting the last row
+    if (tableBody.children.length > 1) {
+        row.remove();
+    } else {
+        alert('At least one lecture entry is required.');
+    }
+}
 </script>
 </body>
 </html>

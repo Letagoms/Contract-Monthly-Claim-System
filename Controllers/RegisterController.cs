@@ -51,7 +51,7 @@ namespace Contract_Monthly_Claim_System.Controllers
 
             try
             {
-                // ✅ FIX #3: Check if email already exists (Email Uniqueness)
+                // Check if email already exists (Email Uniqueness)
                 var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == Email);
                 if (existingUser != null)
                 {
@@ -60,7 +60,7 @@ namespace Contract_Monthly_Claim_System.Controllers
                     return View();
                 }
 
-                // ✅ FIX #1: Hash password before storing
+                // Hash password before storing
                 var hashedPassword = PasswordHasher.HashPassword(Password);
 
                 // Create user object
@@ -83,25 +83,9 @@ namespace Contract_Monthly_Claim_System.Controllers
                 {
                     _logger.LogInformation("User successfully saved to database");
                     
-                    // ✅ FIX #2: Set session after successful registration
-                    HttpContext.Session.SetString("UserId", user.Id.ToString());
-                    HttpContext.Session.SetString("UserEmail", user.Email);
-                    HttpContext.Session.SetString("UserRole", user.Role);
-                    HttpContext.Session.SetString("UserName", user.Name);
-
-                    // Redirect based on role
-                    switch (role)
-                    {
-                        case "Lecturer":
-                            return RedirectToAction("Index", "LectureClaim");
-                        case "Coordinator":
-                            return RedirectToAction("Index", "Coordinator");
-                        case "Manager":
-                            return RedirectToAction("Index", "Manager");
-                        default:
-                            ViewBag.Error = "Invalid role selected.";
-                            return View();
-                    }
+                    // ✅ CHANGED: Redirect to Login page with success message
+                    TempData["SuccessMessage"] = "Registration successful! Please log in with your credentials.";
+                    return RedirectToAction("Index", "Login");
                 }
                 else
                 {

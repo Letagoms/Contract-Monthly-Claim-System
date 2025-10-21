@@ -20,25 +20,28 @@ namespace Contract_Monthly_Claim_System.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(string email, string role)
+        public IActionResult Index(string email, string role)
         {
-            var user = await _context.Users
-                .FirstOrDefaultAsync(u => u.Email == email && u.Role == role);
-
-            if (user != null)
+            // Simple validation to ensure role is selected
+            if (string.IsNullOrEmpty(role))
             {
-                // Store user info in session or authentication
-                if (role == "Lecturer")
-                    return RedirectToAction("Index", "LectureClaim");
-                if (role == "Coordinator")
-                    return RedirectToAction("Index", "Coordinator");
-                if (role == "Manager")
-                    return RedirectToAction("Index", "Manager");
+                ViewBag.Error = "Please select a role.";
+                return View();
             }
 
-            // Fallback
-            ViewBag.Error = "Invalid credentials or role selected.";
-            return View();
+            // Redirect based on selected role without credential validation
+            switch (role)
+            {
+                case "Lecturer":
+                    return RedirectToAction("Index", "LectureClaim");
+                case "Coordinator":
+                    return RedirectToAction("Index", "Coordinator");
+                case "Manager":
+                    return RedirectToAction("Index", "Manager");
+                default:
+                    ViewBag.Error = "Invalid role selected.";
+                    return View();
+            }
         }
     }
 }

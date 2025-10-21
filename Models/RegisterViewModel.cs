@@ -18,7 +18,7 @@ namespace Contract_Monthly_Claim_System.Models
         
         [Required]
         [DataType(DataType.Password)]
-        [StringLength(100, MinimumLength = 6)]
+        [StringLength(100)]
         public string Password { get; set; } = string.Empty;
         
         [Required]

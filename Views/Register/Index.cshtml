@@ -105,9 +105,16 @@
                                 </div>
                             }
 
-                            <a href="/Login/Index" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-4 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/50 focus:ring-offset-background-light dark:focus:ring-offset-background-dark transition-colors duration-200 text-decoration-none">
+                            @if (ViewBag.Success != null)
+                            {
+                                <div class="text-green-500 text-sm">
+                                    @ViewBag.Success
+                                </div>
+                            }
+
+                            <button type="submit" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-4 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/50 focus:ring-offset-background-light dark:focus:ring-offset-background-dark transition-colors duration-200">
                                 <span class="truncate">Register</span>
-                            </a>
+                            </button>
                         </form>
 
                         <div class="text-center">

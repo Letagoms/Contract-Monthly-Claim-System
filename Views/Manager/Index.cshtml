@@ -1,5 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model List<Contract_Monthly_Claim_System.Models.Claim>
 
+<!DOCTYPE html>
 <html class="light" lang="en">
 <head>
     <meta charset="utf-8" />
@@ -34,7 +35,6 @@
 </head>
 
 <body class="bg-background-light dark:bg-background-dark font-display text-[#343A40] dark:text-gray-200">
-
     <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
         <div class="layout-container flex h-full grow flex-col">
             <header class="bg-white dark:bg-background-dark/80 backdrop-blur-sm sticky top-0 z-10 border-b border-gray-200 dark:border-gray-700">
@@ -44,10 +44,10 @@
                             <span class="material-symbols-outlined text-primary text-2xl">
                                 admin_panel_settings
                             </span>
-                            <h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">Contract Monthly Claim System </h2>
+                            <h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">Contract Monthly Claim System - Manager</h2>
                         </div>
                         <div class="flex items-center gap-4">
-                            <a class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em]" href="@Url.Action("Index", "Register")">
+                            <a class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em]" href="@Url.Action("Index", "Login")">
                                 <span class="truncate">Logout</span>
                             </a>
                         </div>
@@ -64,72 +64,131 @@
                             </div>
                         </div>
 
-                     
-                       
-
-                        <!-- Claims Management Table -->
-                        <div class="px-4 py-3">
-                            <div class="flex items-center justify-between mb-4">
-                                <h3 class="text-xl font-bold">All Claims</h3>
-                                
+                        @if (TempData["SuccessMessage"] != null)
+                        {
+                            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mx-4">
+                                @TempData["SuccessMessage"]
                             </div>
-                            <div class="flex overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-background-dark/50">
-                                <table class="flex-1">
-                                    <thead>
-                                        <tr class="bg-gray-50 dark:bg-gray-800/50">
-                                            <th class="px-4 py-3 text-left text-sm font-medium leading-normal w-[12%]">Lecturer</th>
-                                            <th class="px-4 py-3 text-left text-sm font-medium leading-normal w-[18%]">Course</th>
-                                            <th class="px-4 py-3 text-left text-sm font-medium leading-normal w-[15%]">Submission date</th>
-                                            <th class="px-4 py-3 text-left text-sm font-medium leading-normal w-[15%]">Document</th>
-                                            <th class="px-4 py-3 text-left text-sm font-medium leading-normal w-[12%]">Amount</th>
-                                            <th class="px-4 py-3 text-left text-sm font-medium leading-normal w-[12%]">Coordinator Status</th>
-                                            <th class="px-4 py-3 text-left text-sm font-medium leading-normal w-[16%]">Action</th>
-                                        </tr>
-                                    </thead>
+                        }
 
-                                    <!--data from here onwards-->
-                                    <tbody>
-                                        <tr class="border-t border-t-gray-200 dark:border-t-gray-700">
-                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">#CMCS-001</td>
-                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">John Smith</td>
-                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">2023-10-26</td>
-                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">Oct 2023</td>
-                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">$2,500.00</td>
-                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">
-                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#FFC107]/20 text-[#FFC107]">
-                                                    Pending
-                                                </span>
-                                            </td>
-                                            <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">
-                                                <div class="flex gap-2">
-                                                    <button class="px-3 py-1 bg-[#28A745] text-white text-xs rounded hover:bg-[#28A745]/90">Approve</button>
-                                                    <button class="px-3 py-1 bg-[#DC3545] text-white text-xs rounded hover:bg-[#DC3545]/90">Reject</button>
-                                                    <button class="px-3 py-1 bg-primary text-white text-xs rounded hover:bg-primary/90">View</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                       
-                                    </tbody>
-                                </table>
+                        @if (TempData["ErrorMessage"] != null)
+                        {
+                            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mx-4">
+                                @TempData["ErrorMessage"]
                             </div>
-                        </div>
+                        }
 
-                        <!-- Pagination -->
-                        <div class="flex items-center justify-center p-4">
-                            <a class="flex size-10 items-center justify-center hover:bg-gray-200/50 dark:hover:bg-gray-700/50 rounded-full" href="#">
-                                <span class="material-symbols-outlined text-lg">chevron_left</span>
-                            </a>
-                            <a class="text-sm font-bold leading-normal flex size-10 items-center justify-center rounded-full bg-primary/20 text-primary" href="#">1</a>
-                            <a class="text-sm font-normal leading-normal flex size-10 items-center justify-center rounded-full hover:bg-gray-200/50 dark:hover:bg-gray-700/50" href="#">2</a>
-                            <a class="text-sm font-normal leading-normal flex size-10 items-center justify-center rounded-full hover:bg-gray-200/50 dark:hover:bg-gray-700/50" href="#">3</a>
-                            <span class="text-sm font-normal leading-normal flex size-10 items-center justify-center rounded-full">...</span>
-                            <a class="text-sm font-normal leading-normal flex size-10 items-center justify-center rounded-full hover:bg-gray-200/50 dark:hover:bg-gray-700/50" href="#">8</a>
-                            <a class="text-sm font-normal leading-normal flex size-10 items-center justify-center rounded-full hover:bg-gray-200/50 dark:hover:bg-gray-700/50" href="#">9</a>
-                            <a class="text-sm font-normal leading-normal flex size-10 items-center justify-center rounded-full hover:bg-gray-200/50 dark:hover:bg-gray-700/50" href="#">10</a>
-                            <a class="flex size-10 items-center justify-center hover:bg-gray-200/50 dark:hover:bg-gray-700/50 rounded-full" href="#">
-                                <span class="material-symbols-outlined text-lg">chevron_right</span>
-                            </a>
-                        </div>
+                        @if (Model != null && Model.Any())
+                        {
+                            <!-- Claims Management Table -->
+                            <div class="px-4 py-3">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="text-xl font-bold">All Claims</h3>
+                                </div>
+                                <div class="flex overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-background-dark/50">
+                                    <table class="flex-1">
+                                        <thead>
+                                            <tr class="bg-gray-50 dark:bg-gray-800/50">
+                                                <th class="px-4 py-3 text-left text-sm font-medium leading-normal">Lecturer</th>
+                                                <th class="px-4 py-3 text-left text-sm font-medium leading-normal">Course</th>
+                                                <th class="px-4 py-3 text-left text-sm font-medium leading-normal">Date</th>
+                                                <th class="px-4 py-3 text-left text-sm font-medium leading-normal">Amount</th>
+                                                <th class="px-4 py-3 text-left text-sm font-medium leading-normal">Document</th>
+                                                <th class="px-4 py-3 text-left text-sm font-medium leading-normal">Coordinator</th>
+                                                <th class="px-4 py-3 text-left text-sm font-medium leading-normal">Manager</th>
+                                                <th class="px-4 py-3 text-left text-sm font-medium leading-normal">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var claim in Model)
+                                            {
+                                                <tr class="border-t border-t-gray-200 dark:border-t-gray-700">
+                                                    <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">@claim.LecturerName</td>
+                                                    <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">@claim.CourseName</td>
+                                                    <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">@claim.LectureDate.ToString("yyyy-MM-dd")</td>
+                                                    <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">R @claim.TotalAmount.ToString("N2")</td>
+                                                    <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">
+                                                        @if (!string.IsNullOrEmpty(claim.DocumentPath))
+                                                        {
+                                                            <a href="@claim.DocumentPath" target="_blank" class="text-primary hover:underline">View</a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="text-gray-400">N/A</span>
+                                                        }
+                                                    </td>
+                                                    <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">
+                                                        @if (claim.CoordinatorStatus == "Approved")
+                                                        {
+                                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#28A745]/20 text-[#28A745]">
+                                                                Approved
+                                                            </span>
+                                                        }
+                                                        else if (claim.CoordinatorStatus == "Rejected")
+                                                        {
+                                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                                                Rejected
+                                                            </span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#FFC107]/20 text-[#FFC107]">
+                                                                Pending
+                                                            </span>
+                                                        }
+                                                    </td>
+                                                    <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">
+                                                        @if (claim.ManagerStatus == "Approved")
+                                                        {
+                                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#28A745]/20 text-[#28A745]">
+                                                                Approved
+                                                            </span>
+                                                        }
+                                                        else if (claim.ManagerStatus == "Rejected")
+                                                        {
+                                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                                                Rejected
+                                                            </span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#FFC107]/20 text-[#FFC107]">
+                                                                Pending
+                                                            </span>
+                                                        }
+                                                    </td>
+                                                    <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">
+                                                        @if (claim.ManagerStatus == "Pending")
+                                                        {
+                                                            <div class="flex gap-2">
+                                                                <form asp-controller="Manager" asp-action="ApproveClaim" method="post" onsubmit="return confirm('Are you sure you want to APPROVE this claim?');" style="display:inline;">
+                                                                    <input type="hidden" name="claimId" value="@claim.Id" />
+                                                                    <button type="submit" class="px-3 py-1 bg-[#28A745] text-white text-xs rounded hover:bg-[#28A745]/90">Approve</button>
+                                                                </form>
+                                                                <form asp-controller="Manager" asp-action="RejectClaim" method="post" onsubmit="return confirm('Are you sure you want to REJECT this claim?');" style="display:inline;">
+                                                                    <input type="hidden" name="claimId" value="@claim.Id" />
+                                                                    <button type="submit" class="px-3 py-1 bg-[#DC3545] text-white text-xs rounded hover:bg-[#DC3545]/90">Reject</button>
+                                                                </form>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="text-gray-500 text-sm">Already Reviewed</span>
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="text-center py-12">
+                                <p class="text-gray-500 dark:text-gray-400">No claims to review at this time.</p>
+                            </div>
+                        }
                     </div>
                 </div>
             </main>

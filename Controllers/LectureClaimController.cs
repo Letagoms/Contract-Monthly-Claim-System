@@ -12,6 +12,10 @@ namespace Contract_Monthly_Claim_System.Controllers
         private readonly ILogger<LectureClaimController> _logger;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
+        // Constants for validation
+        private const decimal MAX_HOURLY_RATE = 625m;
+        private const decimal MAX_HOURS_WORKED = 160m;
+
         public LectureClaimController(ApplicationDbContext context, ILogger<LectureClaimController> logger, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
@@ -34,6 +38,37 @@ namespace Contract_Monthly_Claim_System.Controllers
 
             try
             {
+                // Validate hourly rate
+                if (HourlyRate > MAX_HOURLY_RATE)
+                {
+                    ViewBag.Error = $"Hourly rate cannot exceed R{MAX_HOURLY_RATE}. Please enter a valid hourly rate.";
+                    ViewBag.UserName = LecturerName;
+                    return View("Index");
+                }
+
+                // Validate hours worked
+                if (HoursWorked > MAX_HOURS_WORKED)
+                {
+                    ViewBag.Error = $"Hours worked cannot exceed {MAX_HOURS_WORKED} hours. Please enter a valid number of hours.";
+                    ViewBag.UserName = LecturerName;
+                    return View("Index");
+                }
+
+                // Validate positive values
+                if (HourlyRate <= 0)
+                {
+                    ViewBag.Error = "Hourly rate must be greater than zero.";
+                    ViewBag.UserName = LecturerName;
+                    return View("Index");
+                }
+
+                if (HoursWorked <= 0)
+                {
+                    ViewBag.Error = "Hours worked must be greater than zero.";
+                    ViewBag.UserName = LecturerName;
+                    return View("Index");
+                }
+
                 // Get user ID from session
                 var userIdString = HttpContext.Session.GetString("UserId");
                 if (string.IsNullOrEmpty(userIdString))

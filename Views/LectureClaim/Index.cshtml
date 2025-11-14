@@ -72,7 +72,7 @@
                             </div>
                         }
 
-                        <form asp-controller="LectureClaim" asp-action="SubmitClaim" method="post" enctype="multipart/form-data">
+                        <form id="claimForm" asp-controller="LectureClaim" asp-action="SubmitClaim" method="post" enctype="multipart/form-data">
                             <div class="space-y-8">
                                 <section>
                                     <h2 class="text-xl md:text-[22px] font-bold leading-tight tracking-[-0.015em] pb-3 pt-5 border-b border-gray-200 dark:border-gray-700 mb-4">Claim Details</h2>
@@ -97,18 +97,38 @@
                                                 <p class="text-sm font-medium pb-2">Course Name</p>
                                                 <input name="CourseName" type="text" required placeholder="e.g., Advanced .NET" class="form-input w-full rounded-lg border-[#cfdbe7] dark:border-gray-600 bg-background-light dark:bg-gray-800 focus:border-primary focus:ring-primary/50 text-sm h-12 px-3" />
                                             </label>
+                                            
+                                            <!-- Hours Worked with Real-time Validation -->
                                             <label class="flex flex-col">
-                                                <p class="text-sm font-medium pb-2">Hours Worked</p>
-                                                <input id="hoursWorked" name="HoursWorked" type="number" step="0.5" min="0" required placeholder="0" class="form-input w-full rounded-lg border-[#cfdbe7] dark:border-gray-600 bg-background-light dark:bg-gray-800 focus:border-primary focus:ring-primary/50 text-sm h-12 px-3" />
-                                            </label>
-                                            <label class="flex flex-col">
-                                                <p class="text-sm font-medium pb-2">Hourly Rate (R)</p>
-                                                <input id="hourlyRate" name="HourlyRate" type="number" step="0.01" min="0" required placeholder="0.00" class="form-input w-full rounded-lg border-[#cfdbe7] dark:border-gray-600 bg-background-light dark:bg-gray-800 focus:border-primary focus:ring-primary/50 text-sm h-12 px-3" />
+                                                <p class="text-sm font-medium pb-2">Hours Worked <span class="text-gray-500">(Max: 160 hours)</span></p>
+                                                <input id="hoursWorked" name="HoursWorked" type="number" step="0.5" min="0" max="160" required placeholder="0" class="form-input w-full rounded-lg border-[#cfdbe7] dark:border-gray-600 bg-background-light dark:bg-gray-800 focus:border-primary focus:ring-primary/50 text-sm h-12 px-3" />
+                                                <div id="hoursWorkedError" class="hidden mt-2 p-3 bg-red-100 dark:bg-red-900/30 border border-red-400 dark:border-red-700 text-red-700 dark:text-red-300 rounded-lg flex items-start gap-2">
+                                                    <span class="material-symbols-outlined text-red-600 dark:text-red-400" style="font-size: 20px;">error</span>
+                                                    <span class="text-sm font-medium"></span>
+                                                </div>
+                                                <div id="hoursWorkedSuccess" class="hidden mt-2 p-3 bg-green-100 dark:bg-green-900/30 border border-green-400 dark:border-green-700 text-green-700 dark:text-green-300 rounded-lg flex items-start gap-2">
+                                                    <span class="material-symbols-outlined text-green-600 dark:text-green-400" style="font-size: 20px;">check_circle</span>
+                                                    <span class="text-sm font-medium">Valid hours entered</span>
+                                                </div>
                                             </label>
                                             
-                                            <!-- NEW: Total Amount Display -->
+                                            <!-- Hourly Rate with Real-time Validation -->
+                                            <label class="flex flex-col">
+                                                <p class="text-sm font-medium pb-2">Hourly Rate (R) <span class="text-gray-500">(Max: R625)</span></p>
+                                                <input id="hourlyRate" name="HourlyRate" type="number" step="0.01" min="0" max="625" required placeholder="0.00" class="form-input w-full rounded-lg border-[#cfdbe7] dark:border-gray-600 bg-background-light dark:bg-gray-800 focus:border-primary focus:ring-primary/50 text-sm h-12 px-3" />
+                                                <div id="hourlyRateError" class="hidden mt-2 p-3 bg-red-100 dark:bg-red-900/30 border border-red-400 dark:border-red-700 text-red-700 dark:text-red-300 rounded-lg flex items-start gap-2">
+                                                    <span class="material-symbols-outlined text-red-600 dark:text-red-400" style="font-size: 20px;">error</span>
+                                                    <span class="text-sm font-medium"></span>
+                                                </div>
+                                                <div id="hourlyRateSuccess" class="hidden mt-2 p-3 bg-green-100 dark:bg-green-900/30 border border-green-400 dark:border-green-700 text-green-700 dark:text-green-300 rounded-lg flex items-start gap-2">
+                                                    <span class="material-symbols-outlined text-green-600 dark:text-green-400" style="font-size: 20px;">check_circle</span>
+                                                    <span class="text-sm font-medium">Valid rate entered</span>
+                                                </div>
+                                            </label>
+                                            
+                                            <!-- Total Amount Display -->
                                             <div class="flex flex-col p-4 bg-primary/10 dark:bg-primary/20 border-2 border-primary/30 rounded-lg">
-                                                <p class="text-sm font-medium pb-2 text-primary dark:text-primary/90">Total Amount </p>
+                                                <p class="text-sm font-medium pb-2 text-primary dark:text-primary/90">Total Amount</p>
                                                 <div class="flex items-center gap-2">
                                                     <span class="text-2xl font-bold text-primary dark:text-primary/90">R</span>
                                                     <span id="totalAmount" class="text-3xl font-black text-primary dark:text-primary/90">0.00</span>
@@ -145,7 +165,7 @@
                                 </section>
 
                                 <div class="flex justify-end gap-4 pt-8">
-                                    <button type="submit" class="flex min-w-[120px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90">
+                                    <button id="submitBtn" type="submit" class="flex min-w-[120px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 disabled:bg-gray-400 disabled:cursor-not-allowed">
                                         <span class="truncate">Submit Claim</span>
                                     </button>
                                 </div>
@@ -158,6 +178,145 @@
     </div>
 
     <script>
+        // Validation constants (matching server-side validation)
+        const MAX_HOURLY_RATE = 625;
+        const MAX_HOURS_WORKED = 160;
+
+        // Get form elements
+        const hoursWorkedInput = document.getElementById('hoursWorked');
+        const hourlyRateInput = document.getElementById('hourlyRate');
+        const submitBtn = document.getElementById('submitBtn');
+        const claimForm = document.getElementById('claimForm');
+
+        // Validation state
+        let isHoursValid = true;
+        let isRateValid = true;
+
+        // Real-time validation for Hours Worked
+        function validateHoursWorked() {
+            const value = parseFloat(hoursWorkedInput.value);
+            const errorDiv = document.getElementById('hoursWorkedError');
+            const successDiv = document.getElementById('hoursWorkedSuccess');
+            const errorText = errorDiv.querySelector('span:last-child');
+
+            if (hoursWorkedInput.value === '' || isNaN(value)) {
+                errorDiv.classList.add('hidden');
+                successDiv.classList.add('hidden');
+                hoursWorkedInput.classList.remove('border-red-500', 'border-green-500');
+                isHoursValid = true;
+                updateSubmitButton();
+                return;
+            }
+
+            if (value <= 0) {
+                errorText.textContent = 'Hours worked must be greater than zero.';
+                errorDiv.classList.remove('hidden');
+                successDiv.classList.add('hidden');
+                hoursWorkedInput.classList.add('border-red-500');
+                hoursWorkedInput.classList.remove('border-green-500');
+                isHoursValid = false;
+            } else if (value > MAX_HOURS_WORKED) {
+                errorText.textContent = `Hours worked cannot exceed ${MAX_HOURS_WORKED} hours. You entered ${value} hours.`;
+                errorDiv.classList.remove('hidden');
+                successDiv.classList.add('hidden');
+                hoursWorkedInput.classList.add('border-red-500');
+                hoursWorkedInput.classList.remove('border-green-500');
+                isHoursValid = false;
+            } else {
+                errorDiv.classList.add('hidden');
+                successDiv.classList.remove('hidden');
+                hoursWorkedInput.classList.remove('border-red-500');
+                hoursWorkedInput.classList.add('border-green-500');
+                isHoursValid = true;
+            }
+
+            updateSubmitButton();
+            calculateTotal();
+        }
+
+        // Real-time validation for Hourly Rate
+        function validateHourlyRate() {
+            const value = parseFloat(hourlyRateInput.value);
+            const errorDiv = document.getElementById('hourlyRateError');
+            const successDiv = document.getElementById('hourlyRateSuccess');
+            const errorText = errorDiv.querySelector('span:last-child');
+
+            if (hourlyRateInput.value === '' || isNaN(value)) {
+                errorDiv.classList.add('hidden');
+                successDiv.classList.add('hidden');
+                hourlyRateInput.classList.remove('border-red-500', 'border-green-500');
+                isRateValid = true;
+                updateSubmitButton();
+                return;
+            }
+
+            if (value <= 0) {
+                errorText.textContent = 'Hourly rate must be greater than zero.';
+                errorDiv.classList.remove('hidden');
+                successDiv.classList.add('hidden');
+                hourlyRateInput.classList.add('border-red-500');
+                hourlyRateInput.classList.remove('border-green-500');
+                isRateValid = false;
+            } else if (value > MAX_HOURLY_RATE) {
+                errorText.textContent = `Hourly rate cannot exceed R${MAX_HOURLY_RATE}. You entered R${value.toFixed(2)}.`;
+                errorDiv.classList.remove('hidden');
+                successDiv.classList.add('hidden');
+                hourlyRateInput.classList.add('border-red-500');
+                hourlyRateInput.classList.remove('border-green-500');
+                isRateValid = false;
+            } else {
+                errorDiv.classList.add('hidden');
+                successDiv.classList.remove('hidden');
+                hourlyRateInput.classList.remove('border-red-500');
+                hourlyRateInput.classList.add('border-green-500');
+                isRateValid = true;
+            }
+
+            updateSubmitButton();
+            calculateTotal();
+        }
+
+        // Update submit button state
+        function updateSubmitButton() {
+            if (isHoursValid && isRateValid) {
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-50');
+            } else {
+                submitBtn.disabled = true;
+                submitBtn.classList.add('opacity-50');
+            }
+        }
+
+        // Calculate total amount
+        function calculateTotal() {
+            const hoursWorked = parseFloat(hoursWorkedInput.value) || 0;
+            const hourlyRate = parseFloat(hourlyRateInput.value) || 0;
+            const totalAmount = hoursWorked * hourlyRate;
+            
+            document.getElementById('totalAmount').textContent = totalAmount.toFixed(2);
+        }
+
+        // Add event listeners for real-time validation
+        hoursWorkedInput.addEventListener('input', validateHoursWorked);
+        hoursWorkedInput.addEventListener('change', validateHoursWorked);
+        hoursWorkedInput.addEventListener('blur', validateHoursWorked);
+
+        hourlyRateInput.addEventListener('input', validateHourlyRate);
+        hourlyRateInput.addEventListener('change', validateHourlyRate);
+        hourlyRateInput.addEventListener('blur', validateHourlyRate);
+
+        // Prevent form submission if validation fails
+        claimForm.addEventListener('submit', function(e) {
+            validateHoursWorked();
+            validateHourlyRate();
+            
+            if (!isHoursValid || !isRateValid) {
+                e.preventDefault();
+                alert('Please fix the validation errors before submitting.');
+                return false;
+            }
+        });
+
         // File upload preview functionality
         document.getElementById('documentFile').addEventListener('change', function(e) {
             const file = e.target.files[0];
@@ -178,24 +337,6 @@
                 `;
             }
         });
-
-        // NEW: Automatic total amount calculation
-        function calculateTotal() {
-            const hoursWorked = parseFloat(document.getElementById('hoursWorked').value) || 0;
-            const hourlyRate = parseFloat(document.getElementById('hourlyRate').value) || 0;
-            const totalAmount = hoursWorked * hourlyRate;
-            
-            // Update the display with formatted currency
-            document.getElementById('totalAmount').textContent = totalAmount.toFixed(2);
-        }
-
-        // Add event listeners to both input fields
-        document.getElementById('hoursWorked').addEventListener('input', calculateTotal);
-        document.getElementById('hourlyRate').addEventListener('input', calculateTotal);
-        
-        // Also trigger on change event for better compatibility
-        document.getElementById('hoursWorked').addEventListener('change', calculateTotal);
-        document.getElementById('hourlyRate').addEventListener('change', calculateTotal);
     </script>
 </body>
 </html>

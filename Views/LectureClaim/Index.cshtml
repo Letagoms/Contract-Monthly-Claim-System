@@ -99,12 +99,23 @@
                                             </label>
                                             <label class="flex flex-col">
                                                 <p class="text-sm font-medium pb-2">Hours Worked</p>
-                                                <input name="HoursWorked" type="number" step="0.5" min="0" required placeholder="0" class="form-input w-full rounded-lg border-[#cfdbe7] dark:border-gray-600 bg-background-light dark:bg-gray-800 focus:border-primary focus:ring-primary/50 text-sm h-12 px-3" />
+                                                <input id="hoursWorked" name="HoursWorked" type="number" step="0.5" min="0" required placeholder="0" class="form-input w-full rounded-lg border-[#cfdbe7] dark:border-gray-600 bg-background-light dark:bg-gray-800 focus:border-primary focus:ring-primary/50 text-sm h-12 px-3" />
                                             </label>
                                             <label class="flex flex-col">
                                                 <p class="text-sm font-medium pb-2">Hourly Rate (R)</p>
-                                                <input name="HourlyRate" type="number" step="0.01" min="0" required placeholder="0.00" class="form-input w-full rounded-lg border-[#cfdbe7] dark:border-gray-600 bg-background-light dark:bg-gray-800 focus:border-primary focus:ring-primary/50 text-sm h-12 px-3" />
+                                                <input id="hourlyRate" name="HourlyRate" type="number" step="0.01" min="0" required placeholder="0.00" class="form-input w-full rounded-lg border-[#cfdbe7] dark:border-gray-600 bg-background-light dark:bg-gray-800 focus:border-primary focus:ring-primary/50 text-sm h-12 px-3" />
                                             </label>
+                                            
+                                            <!-- NEW: Total Amount Display -->
+                                            <div class="flex flex-col p-4 bg-primary/10 dark:bg-primary/20 border-2 border-primary/30 rounded-lg">
+                                                <p class="text-sm font-medium pb-2 text-primary dark:text-primary/90">Total Amount </p>
+                                                <div class="flex items-center gap-2">
+                                                    <span class="text-2xl font-bold text-primary dark:text-primary/90">R</span>
+                                                    <span id="totalAmount" class="text-3xl font-black text-primary dark:text-primary/90">0.00</span>
+                                                </div>
+                                                <p class="text-xs text-gray-600 dark:text-gray-400 mt-2">Hours Worked × Hourly Rate</p>
+                                            </div>
+
                                             <label class="flex flex-col">
                                                 <p class="text-sm font-medium pb-2">Description (Optional)</p>
                                                 <textarea name="Description" rows="3" placeholder="Additional notes about this claim..." class="form-input w-full rounded-lg border-[#cfdbe7] dark:border-gray-600 bg-background-light dark:bg-gray-800 focus:border-primary focus:ring-primary/50 text-sm p-3"></textarea>
@@ -147,6 +158,7 @@
     </div>
 
     <script>
+        // File upload preview functionality
         document.getElementById('documentFile').addEventListener('change', function(e) {
             const file = e.target.files[0];
             const preview = document.getElementById('filePreview');
@@ -166,6 +178,24 @@
                 `;
             }
         });
+
+        // NEW: Automatic total amount calculation
+        function calculateTotal() {
+            const hoursWorked = parseFloat(document.getElementById('hoursWorked').value) || 0;
+            const hourlyRate = parseFloat(document.getElementById('hourlyRate').value) || 0;
+            const totalAmount = hoursWorked * hourlyRate;
+            
+            // Update the display with formatted currency
+            document.getElementById('totalAmount').textContent = totalAmount.toFixed(2);
+        }
+
+        // Add event listeners to both input fields
+        document.getElementById('hoursWorked').addEventListener('input', calculateTotal);
+        document.getElementById('hourlyRate').addEventListener('input', calculateTotal);
+        
+        // Also trigger on change event for better compatibility
+        document.getElementById('hoursWorked').addEventListener('change', calculateTotal);
+        document.getElementById('hourlyRate').addEventListener('change', calculateTotal);
     </script>
 </body>
 </html>

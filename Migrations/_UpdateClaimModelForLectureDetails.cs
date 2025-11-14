@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Contract_Monthly_Claim_System.Migrations
 {
-    /// <inheritdoc />
+    
     public partial class UpdateClaimModelForLectureDetails : Migration
     {
-        /// <inheritdoc />
+       
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.RenameColumn(

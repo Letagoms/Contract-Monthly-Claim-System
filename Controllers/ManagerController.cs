@@ -19,7 +19,7 @@ namespace Contract_Monthly_Claim_System.Controllers
 
         public async Task<IActionResult> Index()
         {
-            // Get all claims with user details
+            // Get ALL claims with user details - no filtering
             var claims = await _context.Claims
                 .Include(c => c.User)
                 .OrderByDescending(c => c.SubmittedDate)

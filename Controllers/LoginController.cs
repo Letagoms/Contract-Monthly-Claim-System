@@ -72,6 +72,8 @@ namespace Contract_Monthly_Claim_System.Controllers
                         return RedirectToAction("Index", "Coordinator");
                     case "Manager":
                         return RedirectToAction("Index", "Manager");
+                    case "Admin":
+                        return RedirectToAction("Index", "Admin"); // Add Admin controller redirect
                     default:
                         ViewBag.Error = "Invalid role selected.";
                         return View();

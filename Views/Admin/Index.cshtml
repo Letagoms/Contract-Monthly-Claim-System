@@ -48,6 +48,16 @@
                     </div>
                     <h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">CMCS</h2>
                 </div>
+                <div class="flex items-center gap-4">
+                    <a href="@Url.Action("Index", "EditLectureInfo")" class="flex items-center justify-center rounded-lg h-9 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 gap-2 text-sm font-medium leading-normal tracking-wide px-3 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                        <span class="material-symbols-outlined text-base">person</span>
+                        <span>Edit Lecturer Profile</span>
+                    </a>
+                    <a href="@Url.Action("Index", "Login")" class="flex items-center justify-center rounded-lg h-9 text-slate-700 dark:text-slate-200 gap-2 text-sm font-medium leading-normal tracking-wide px-3 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                        <span class="material-symbols-outlined text-base">logout</span>
+                        <span>Logout</span>
+                    </a>
+                </div>
             </header>
             <main class="flex-1 px-4 py-8 sm:px-6 lg:px-10">
                 <div class="mx-auto max-w-7xl">
@@ -59,22 +69,22 @@
                     </div>
                     <div class="bg-white dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800 p-6">
                         <h3 class="text-slate-800 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] mb-4">Filter Report</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-end">
-                            <label class="flex flex-col w-full">
+                        <div class="grid grid-cols-1 lg:grid-cols-5 gap-4 items-end">
+                            <label class="flex flex-col w-full lg:col-span-2">
                                 <p class="text-slate-700 dark:text-slate-300 text-sm font-medium leading-normal pb-2">Start Date</p>
                                 <div class="relative">
                                     <input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-800 dark:text-slate-200 focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-slate-800 focus:border-primary h-12 placeholder:text-slate-400 p-3 text-base font-normal leading-normal pl-10" type="text" value="October 5, 2023" />
                                     <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 text-xl">calendar_today</span>
                                 </div>
                             </label>
-                            <label class="flex flex-col w-full">
+                            <label class="flex flex-col w-full lg:col-span-2">
                                 <p class="text-slate-700 dark:text-slate-300 text-sm font-medium leading-normal pb-2">End Date</p>
                                 <div class="relative">
                                     <input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-800 dark:text-slate-200 focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-slate-800 focus:border-primary h-12 placeholder:text-slate-400 p-3 text-base font-normal leading-normal pl-10" type="text" value="October 30, 2023" />
                                     <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 text-xl">calendar_today</span>
                                 </div>
                             </label>
-                            <button class="flex w-full items-center justify-center rounded-lg h-12 bg-primary text-white gap-2 text-sm font-bold leading-normal tracking-wide hover:bg-primary/90 transition-colors">
+                            <button class="flex w-full items-center justify-center rounded-lg h-12 bg-primary text-white gap-2 text-sm font-bold leading-normal tracking-wide hover:bg-primary/90 transition-colors lg:col-span-1">
                                 <span class="material-symbols-outlined">sync</span>
                                 <span>Generate Report</span>
                             </button>
@@ -105,7 +115,6 @@
                                         <th class="px-6 py-3 font-medium" scope="col">Submission Date</th>
                                         <th class="px-6 py-3 font-medium" scope="col">Approval Date</th>
                                         <th class="px-6 py-3 font-medium text-right" scope="col">Total Amount</th>
-                                        <th class="px-6 py-3 font-medium" scope="col">Approving Manager</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -114,35 +123,30 @@
                                         <td class="px-6 py-4">Oct 28, 2023</td>
                                         <td class="px-6 py-4">Oct 29, 2023</td>
                                         <td class="px-6 py-4 font-medium text-right text-slate-800 dark:text-slate-200">$2,450.00</td>
-                                        <td class="px-6 py-4">Eleanor Vance</td>
                                     </tr>
                                     <tr class="border-b border-slate-200 dark:border-slate-800 hover:bg-slate-50/50 dark:hover:bg-slate-800/50">
                                         <td class="px-6 py-4 font-medium text-slate-900 dark:text-white whitespace-nowrap">Maria Garcia</td>
                                         <td class="px-6 py-4">Oct 27, 2023</td>
                                         <td class="px-6 py-4">Oct 28, 2023</td>
                                         <td class="px-6 py-4 font-medium text-right text-slate-800 dark:text-slate-200">$1,980.75</td>
-                                        <td class="px-6 py-4"></td>
                                     </tr>
                                     <tr class="border-b border-slate-200 dark:border-slate-800 hover:bg-slate-50/50 dark:hover:bg-slate-800/50">
                                         <td class="px-6 py-4 font-medium text-slate-900 dark:text-white whitespace-nowrap">Robert Johnson</td>
                                         <td class="px-6 py-4">Oct 26, 2023</td>
                                         <td class="px-6 py-4">Oct 27, 2023</td>
                                         <td class="px-6 py-4 font-medium text-right text-slate-800 dark:text-slate-200">$3,120.00</td>
-                                        <td class="px-6 py-4">Eleanor Vance</td>
                                     </tr>
                                     <tr class="border-b border-slate-200 dark:border-slate-800 hover:bg-slate-50/50 dark:hover:bg-slate-800/50">
                                         <td class="px-6 py-4 font-medium text-slate-900 dark:text-white whitespace-nowrap">Olivia Martinez</td>
                                         <td class="px-6 py-4">Oct 22, 2023</td>
                                         <td class="px-6 py-4">Oct 23, 2023</td>
                                         <td class="px-6 py-4 font-medium text-right text-slate-800 dark:text-slate-200">$1,500.50</td>
-                                        <td class="px-6 py-4">David Chen</td>
                                     </tr>
                                     <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/50">
                                         <td class="px-6 py-4 font-medium text-slate-900 dark:text-white whitespace-nowrap">James Brown</td>
                                         <td class="px-6 py-4">Oct 19, 2023</td>
                                         <td class="px-6 py-4">Oct 20, 2023</td>
                                         <td class="px-6 py-4 font-medium text-right text-slate-800 dark:text-slate-200">$2,780.25</td>
-                                        <td class="px-6 py-4">Eleanor Vance</td>
                                     </tr>
                                 </tbody>
                             </table>

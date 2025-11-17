@@ -19,8 +19,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Edit Lecture info\" />
-  </ItemGroup>
-
 </Project>

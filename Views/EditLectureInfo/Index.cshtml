@@ -82,12 +82,19 @@
                                 <h3 class="text-slate-800 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em]">
                                     Editing Lecturer Profile</h3>
                                 <div class="relative w-full md:max-w-xs">
-                                    <select
+                                    <select id="lecturerSelect"
                                         class="form-select flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-800 dark:text-slate-200 focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-slate-800 focus:border-primary h-12 placeholder:text-slate-400 px-3 py-3 text-base font-normal leading-normal appearance-none">
-                                        <option value="Johnathan Smith">Johnathan Smith</option>
-                                        <option value="Alice Johnson">Alice Johnson</option>
-                                        <option value="Robert Brown">Robert Brown</option>
-                                        <option value="Emily Davis">Emily Davis</option>
+                                        @if (ViewBag.Lecturers != null && ViewBag.Lecturers.Count > 0)
+                                        {
+                                            @foreach (var lecturer in ViewBag.Lecturers)
+                                            {
+                                                <option value="@lecturer.Id">@lecturer.Name</option>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <option value="">No lecturers registered</option>
+                                        }
                                     </select>
                                     <span
                                         class="material-symbols-outlined pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-slate-400">
@@ -104,23 +111,23 @@
                                 <label class="flex flex-col w-full">
                                     <p class="text-slate-700 dark:text-slate-300 text-sm font-medium leading-normal pb-2">First
                                         Name</p>
-                                    <input
+                                    <input id="firstName"
                                         class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-800 dark:text-slate-200 focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-slate-800 focus:border-primary h-12 placeholder:text-slate-400 p-3 text-base font-normal leading-normal"
-                                        type="text" value="Johnathan" />
+                                        type="text" value="" />
                                 </label>
                                 <label class="flex flex-col w-full">
                                     <p class="text-slate-700 dark:text-slate-300 text-sm font-medium leading-normal pb-2">Last
                                         Name</p>
-                                    <input
+                                    <input id="lastName"
                                         class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-800 dark:text-slate-200 focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-slate-800 focus:border-primary h-12 placeholder:text-slate-400 p-3 text-base font-normal leading-normal"
-                                        type="text" value="Smith" />
+                                        type="text" value="" />
                                 </label>
                                 <label class="flex flex-col w-full md:col-span-2">
                                     <p class="text-slate-700 dark:text-slate-300 text-sm font-medium leading-normal pb-2">Email
                                     </p>
-                                    <input
+                                    <input id="email"
                                         class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-800 dark:text-slate-200 focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-slate-800 focus:border-primary h-12 placeholder:text-slate-400 p-3 text-base font-normal leading-normal"
-                                        type="email" value="j.smith@university.edu" />
+                                        type="email" value="" />
                                 </label>
                             </div>
                         </div>
@@ -149,7 +156,7 @@
                                         class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-800 dark:text-slate-200 focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-slate-800 focus:border-primary h-12 placeholder:text-slate-400 p-3 text-base font-normal leading-normal"
                                         type="password" />
                                 </label>
-                            </div>
+                            </div>          
                             <div class="mt-6 flex justify-end">
                                 <button
                                     class="flex w-full sm:w-auto items-center justify-center rounded-lg h-12 bg-primary text-white gap-2 text-sm font-bold leading-normal tracking-wide hover:bg-primary/90 transition-colors px-6">
@@ -173,6 +180,29 @@
             </main>
         </div>
     </div>
+
+    <script>
+        // Auto-populate form fields when lecturer is selected
+        const lecturerSelect = document.getElementById('lecturerSelect');
+        const lecturers = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(ViewBag.Lecturers ?? new List<object>()));
+
+        lecturerSelect.addEventListener('change', function() {
+            const selectedId = parseInt(this.value);
+            const lecturer = lecturers.find(l => l.Id === selectedId);
+            
+            if (lecturer) {
+                const nameParts = lecturer.Name.split(' ');
+                document.getElementById('firstName').value = nameParts[0] || '';
+                document.getElementById('lastName').value = nameParts.slice(1).join(' ') || '';
+                document.getElementById('email').value = lecturer.Email || '';
+            }
+        });
+
+        // Trigger change event on page load to populate fields with first lecturer
+        if (lecturers.length > 0) {
+            lecturerSelect.dispatchEvent(new Event('change'));
+        }
+    </script>
 </body>
 
 </html>

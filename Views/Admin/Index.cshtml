@@ -70,6 +70,13 @@
                         </div>
                     </div>
 
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-4">
+                            @TempData["ErrorMessage"]
+                        </div>
+                    }
+
                     <form method="get" asp-action="Index" id="reportForm">
                         <div class="bg-white dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800 p-6">
                             <h3 class="text-slate-800 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] mb-4">Filter Report</h3>
@@ -116,10 +123,10 @@
                                     <p class="text-2xl font-bold text-slate-800 dark:text-slate-100">R @ViewBag.TotalAmount.ToString("N2")</p>
                                 </div>
                             </div>
-                            <button onclick="window.print()" class="flex items-center justify-center rounded-lg h-10 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 gap-2 text-sm font-medium leading-normal tracking-wide px-4 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                            <a href="@Url.Action("ExportReport", "Admin", new { startDate = ViewBag.StartDate, endDate = ViewBag.EndDate, allTime = ViewBag.AllTime })" class="flex items-center justify-center rounded-lg h-10 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 gap-2 text-sm font-medium leading-normal tracking-wide px-4 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
                                 <span class="material-symbols-outlined text-base">download</span>
                                 <span>Export Report</span>
-                            </button>
+                            </a>
                         </div>
 
                         @if (ViewBag.ApprovedClaims != null && ViewBag.ApprovedClaims.Count > 0)

@@ -17,21 +17,33 @@ namespace Contract_Monthly_Claim_System.Controllers
             _logger = logger;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(DateTime? startDate, DateTime? endDate, bool allTime = false)
         {
-            // Get all users with their role information
-            var users = await _context.Users
-                .OrderByDescending(u => u.CreatedDate)
-                .ToListAsync();
-
-            // Get all claims with user details
-            var claims = await _context.Claims
+            // Query for approved claims only (both Coordinator and Manager approved)
+            var query = _context.Claims
                 .Include(c => c.User)
+                .Where(c => c.CoordinatorStatus == "Approved" && c.ManagerStatus == "Approved");
+
+            // Apply date filtering if not "all time"
+            if (!allTime && startDate.HasValue && endDate.HasValue)
+            {
+                query = query.Where(c => c.SubmittedDate >= startDate.Value && c.SubmittedDate <= endDate.Value);
+            }
+
+            var approvedClaims = await query
                 .OrderByDescending(c => c.SubmittedDate)
                 .ToListAsync();
 
-            ViewBag.Users = users;
-            ViewBag.Claims = claims;
+            // Calculate totals
+            var totalClaims = approvedClaims.Count;
+            var totalAmount = approvedClaims.Sum(c => c.TotalAmount);
+
+            ViewBag.TotalClaims = totalClaims;
+            ViewBag.TotalAmount = totalAmount;
+            ViewBag.ApprovedClaims = approvedClaims;
+            ViewBag.StartDate = startDate?.ToString("yyyy-MM-dd") ?? DateTime.Now.AddMonths(-1).ToString("yyyy-MM-dd");
+            ViewBag.EndDate = endDate?.ToString("yyyy-MM-dd") ?? DateTime.Now.ToString("yyyy-MM-dd");
+            ViewBag.AllTime = allTime;
 
             return View();
         }

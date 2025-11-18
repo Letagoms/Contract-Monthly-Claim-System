@@ -76,113 +76,129 @@
                             </a>
                         </div>
                     </div>
-                    <div class="space-y-8">
-                        <div class="bg-white dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800 p-6">
-                            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-                                <h3 class="text-slate-800 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em]">
-                                    Editing Lecturer Profile</h3>
-                                <div class="relative w-full md:max-w-xs">
-                                    <select id="lecturerSelect"
-                                        class="form-select flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-800 dark:text-slate-200 focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-slate-800 focus:border-primary h-12 placeholder:text-slate-400 px-3 py-3 text-base font-normal leading-normal appearance-none">
-                                        @if (ViewBag.Lecturers != null && ViewBag.Lecturers.Count > 0)
-                                        {
-                                            @foreach (var lecturer in ViewBag.Lecturers)
+
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg mb-6">
+                            @TempData["SuccessMessage"]
+                        </div>
+                    }
+
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-6">
+                            @TempData["ErrorMessage"]
+                        </div>
+                    }
+
+                    <form method="post" asp-action="UpdateProfile">
+                        <div class="space-y-8">
+                            <div class="bg-white dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800 p-6">
+                                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                                    <h3 class="text-slate-800 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em]">
+                                        Select Lecturer Profile</h3>
+                                    <div class="relative w-full md:max-w-xs">
+                                        <select id="lecturerSelect" name="UserId" required
+                                            class="form-select flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-800 dark:text-slate-200 focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-slate-800 focus:border-primary h-12 placeholder:text-slate-400 px-3 py-3 text-base font-normal leading-normal appearance-none">
+                                            @if (ViewBag.Lecturers != null && ViewBag.Lecturers.Count > 0)
                                             {
-                                                <option value="@lecturer.Id">@lecturer.Name</option>
+                                                @foreach (var lecturer in ViewBag.Lecturers)
+                                                {
+                                                    <option value="@lecturer.Id">@lecturer.Name</option>
+                                                }
                                             }
-                                        }
-                                        else
-                                        {
-                                            <option value="">No lecturers registered</option>
-                                        }
-                                    </select>
-                                    <span
-                                        class="material-symbols-outlined pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-slate-400">
-                                        expand_more</span>
+                                            else
+                                            {
+                                                <option value="">No lecturers registered</option>
+                                            }
+                                        </select>
+                                        <span
+                                            class="material-symbols-outlined pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-slate-400">
+                                            expand_more</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="bg-white dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800 p-6">
-                            <div class="flex items-center justify-between mb-6">
-                                <h3 class="text-slate-800 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em]">
-                                    Personal Information</h3>
+
+                            <div class="bg-white dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800 p-6">
+                                <div class="flex items-center justify-between mb-6">
+                                    <h3 class="text-slate-800 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em]">
+                                        Personal Information</h3>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+                                    <label class="flex flex-col w-full">
+                                        <p class="text-slate-700 dark:text-slate-300 text-sm font-medium leading-normal pb-2">First Name (Cannot be changed)</p>
+                                        <input id="firstName" name="FirstName" readonly
+                                            class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-500 dark:text-slate-400 focus:outline-0 border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-900 h-12 placeholder:text-slate-400 p-3 text-base font-normal leading-normal cursor-not-allowed"
+                                            type="text" value="" />
+                                    </label>
+                                    <label class="flex flex-col w-full">
+                                        <p class="text-slate-700 dark:text-slate-300 text-sm font-medium leading-normal pb-2">Last Name</p>
+                                        <input id="lastName" name="LastName" required
+                                            class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-800 dark:text-slate-200 focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-slate-800 focus:border-primary h-12 placeholder:text-slate-400 p-3 text-base font-normal leading-normal"
+                                            type="text" value="" />
+                                    </label>
+                                    <label class="flex flex-col w-full md:col-span-2">
+                                        <p class="text-slate-700 dark:text-slate-300 text-sm font-medium leading-normal pb-2">Email</p>
+                                        <input id="email" name="Email" required
+                                            class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-800 dark:text-slate-200 focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-slate-800 focus:border-primary h-12 placeholder:text-slate-400 p-3 text-base font-normal leading-normal"
+                                            type="email" value="" />
+                                    </label>
+                                </div>
                             </div>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
-                                <label class="flex flex-col w-full">
-                                    <p class="text-slate-700 dark:text-slate-300 text-sm font-medium leading-normal pb-2">First
-                                        Name</p>
-                                    <input id="firstName"
-                                        class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-800 dark:text-slate-200 focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-slate-800 focus:border-primary h-12 placeholder:text-slate-400 p-3 text-base font-normal leading-normal"
-                                        type="text" value="" />
-                                </label>
-                                <label class="flex flex-col w-full">
-                                    <p class="text-slate-700 dark:text-slate-300 text-sm font-medium leading-normal pb-2">Last
-                                        Name</p>
-                                    <input id="lastName"
-                                        class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-800 dark:text-slate-200 focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-slate-800 focus:border-primary h-12 placeholder:text-slate-400 p-3 text-base font-normal leading-normal"
-                                        type="text" value="" />
-                                </label>
-                                <label class="flex flex-col w-full md:col-span-2">
-                                    <p class="text-slate-700 dark:text-slate-300 text-sm font-medium leading-normal pb-2">Email
-                                    </p>
-                                    <input id="email"
-                                        class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-800 dark:text-slate-200 focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-slate-800 focus:border-primary h-12 placeholder:text-slate-400 p-3 text-base font-normal leading-normal"
-                                        type="email" value="" />
-                                </label>
+
+                            <div class="flex justify-end gap-4">
+                                <button type="button" onclick="window.location.href='@Url.Action("Index", "Admin")'"
+                                    class="flex items-center justify-center rounded-lg h-12 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 gap-2 text-sm font-medium leading-normal tracking-wide px-6 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                                    <span>Cancel</span>
+                                </button>
+                                <button type="submit"
+                                    class="flex items-center justify-center rounded-lg h-12 bg-primary text-white gap-2 text-sm font-bold leading-normal tracking-wide hover:bg-primary/90 transition-colors px-6">
+                                    <span class="material-symbols-outlined">save</span>
+                                    <span>Save Changes</span>
+                                </button>
                             </div>
                         </div>
+                    </form>
+
+                    <form method="post" asp-action="ChangePassword" class="mt-8">
                         <div class="bg-white dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800 p-6">
                             <h3 class="text-slate-800 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] mb-6">
                                 Change Password</h3>
+                            <input type="hidden" id="userIdForPassword" name="UserId" value="" />
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4 items-end">
                                 <label class="flex flex-col w-full">
-                                    <p class="text-slate-700 dark:text-slate-300 text-sm font-medium leading-normal pb-2">Current
-                                        Password</p>
-                                    <input
+                                    <p class="text-slate-700 dark:text-slate-300 text-sm font-medium leading-normal pb-2">Current Password</p>
+                                    <input name="CurrentPassword" required
                                         class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-800 dark:text-slate-200 focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-slate-800 focus:border-primary h-12 placeholder:text-slate-400 p-3 text-base font-normal leading-normal"
                                         type="password" />
                                 </label>
                                 <label class="flex flex-col w-full">
-                                    <p class="text-slate-700 dark:text-slate-300 text-sm font-medium leading-normal pb-2">New
-                                        Password</p>
-                                    <input
+                                    <p class="text-slate-700 dark:text-slate-300 text-sm font-medium leading-normal pb-2">New Password</p>
+                                    <input id="newPassword" name="NewPassword" required minlength="6"
                                         class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-800 dark:text-slate-200 focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-slate-800 focus:border-primary h-12 placeholder:text-slate-400 p-3 text-base font-normal leading-normal"
                                         type="password" />
                                 </label>
                                 <label class="flex flex-col w-full">
-                                    <p class="text-slate-700 dark:text-slate-300 text-sm font-medium leading-normal pb-2">Confirm
-                                        New Password</p>
-                                    <input
+                                    <p class="text-slate-700 dark:text-slate-300 text-sm font-medium leading-normal pb-2">Confirm New Password</p>
+                                    <input id="confirmPassword" name="ConfirmPassword" required minlength="6"
                                         class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-800 dark:text-slate-200 focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-slate-800 focus:border-primary h-12 placeholder:text-slate-400 p-3 text-base font-normal leading-normal"
                                         type="password" />
                                 </label>
-                            </div>          
+                            </div>
                             <div class="mt-6 flex justify-end">
-                                <button
+                                <button type="submit"
                                     class="flex w-full sm:w-auto items-center justify-center rounded-lg h-12 bg-primary text-white gap-2 text-sm font-bold leading-normal tracking-wide hover:bg-primary/90 transition-colors px-6">
                                     <span>Change Password</span>
                                 </button>
                             </div>
                         </div>
-                        <div class="flex justify-end gap-4 mt-8">
-                            <button
-                                class="flex items-center justify-center rounded-lg h-12 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 gap-2 text-sm font-medium leading-normal tracking-wide px-6 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
-                                <span>Cancel</span>
-                            </button>
-                            <button
-                                class="flex items-center justify-center rounded-lg h-12 bg-primary text-white gap-2 text-sm font-bold leading-normal tracking-wide hover:bg-primary/90 transition-colors px-6">
-                                <span class="material-symbols-outlined">save</span>
-                                <span>Save Changes</span>
-                            </button>
-                        </div>
-                    </div>
+                        </form>
                 </div>
             </main>
         </div>
     </div>
 
     <script>
-        // Auto-populate form fields when lecturer is selected
         const lecturerSelect = document.getElementById('lecturerSelect');
         const lecturers = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(ViewBag.Lecturers ?? new List<object>()));
 
@@ -195,6 +211,7 @@
                 document.getElementById('firstName').value = nameParts[0] || '';
                 document.getElementById('lastName').value = nameParts.slice(1).join(' ') || '';
                 document.getElementById('email').value = lecturer.Email || '';
+                document.getElementById('userIdForPassword').value = lecturer.Id;
             }
         });
 
@@ -202,6 +219,18 @@
         if (lecturers.length > 0) {
             lecturerSelect.dispatchEvent(new Event('change'));
         }
+
+        // Password validation
+        document.getElementById('confirmPassword').addEventListener('input', function() {
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = this.value;
+            
+            if (newPassword !== confirmPassword) {
+                this.setCustomValidity('Passwords do not match');
+            } else {
+                this.setCustomValidity('');
+            }
+        });
     </script>
 </body>
 
